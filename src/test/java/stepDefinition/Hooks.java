@@ -44,11 +44,10 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
 
-        options.setExperimentalOption("excludeSwitches",
-                Collections.singletonList("enable-automation"));
+        options.addArguments("user-data-dir=C:\\Users\\Swaathihaa.T.T\\AppData\\Local\\Google\\Chrome\\User Data - Copy");
+        options.addArguments("profile-directory=Default");
 
         options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);
