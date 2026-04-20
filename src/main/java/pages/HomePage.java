@@ -32,4 +32,30 @@ public class HomePage {
     public String getSearchText() {
         return searchBox.getAttribute("value");
     }
+    
+    
+    @FindBy(xpath = "//a[@aria-label='My profile']")
+    private WebElement profileImg;
+    
+    public WebElement getProfileImg() {
+        return profileImg;
+    }
+    
+    public boolean isUserLoggedIn() {
+	    try {
+	        // Use a 5-10 second wait instead of immediate check
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	        return wait.until(ExpectedConditions.visibilityOf(getProfileImg())).isDisplayed();
+	    } catch (Exception e) {
+	        System.out.println("⚠️ Profile image not found - user not logged in.");
+	        return false;
+	    }
+	}
+    
+    @FindBy(xpath = "//a[@data-testid='my-courses']")
+    private WebElement myLearning;
+    
+    public WebElement getMyLearning() {
+        return myLearning;
+    }
 }

@@ -5,30 +5,26 @@ import io.cucumber.java.After;
 
 import java.io.FileInputStream;
 import java.time.Duration;
-import java.util.Collections;
 import java.util.Properties;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import utility.Base;
+//import utility.HandleCookies;
 import utility.Pages;
 
 public class Hooks {
 
-    public static WebDriver driver;
     public static Properties prop;
 
-    // Load config
+    // 🔹 Load config
     public void loadConfig() {
 
         prop = new Properties();
 
         try {
-            String path = System.getProperty("user.dir")
-                    + "/src/main/resources/CommonData/config.properties";
-
+            String path = System.getProperty("user.dir") + "/src/main/resources/CommonData/config.properties";
             FileInputStream fis = new FileInputStream(path);
             prop.load(fis);
 
@@ -38,37 +34,62 @@ public class Hooks {
     }
 
     @Before
-    public void setup() {
+    public void setup(io.cucumber.java.Scenario scenario) {
 
         loadConfig();
 
         ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("user-data-dir=C:\\Users\\Swaathihaa.T.T\\AppData\\Local\\Google\\Chrome\\User Data - Copy");
-        options.addArguments("profile-directory=Default");
-
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--start-maximized");
 
-        driver = new ChromeDriver(options);
+        Base.driver = new ChromeDriver(options);
+        Base.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+        Base.driver.get(prop.getProperty("url"));
+
+        Pages.initPages(Base.driver);
         
-        Base.driver = driver;
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        driver.get(prop.getProperty("url"));
-
-        Pages.initPages(driver);
-
         System.out.println("Browser launched");
+
+        // IMPORTANT CONDITION
+//        if (scenario.getSourceTagNames().contains("@signup")) {
+//
+//            System.out.println("👉 Signup scenario - skipping cookies");
+//
+//            return; // ❌ NO cookies, NO login
+//
+//        }
+
+//        // 🔹 Normal flow (for other tests)
+//        HandleCookies cookieUtil = new HandleCookies();
+//        String cookieFile = "cookies.data";
+//
+//        cookieUtil.loadCookies(Base.driver, cookieFile);
+//
+//        if (!Pages.homePage.isUserLoggedIn()) {
+//
+//            System.out.println("👉 Please login manually...");
+//
+//            try {
+//                Thread.sleep(30000);
+//            } catch (Exception e) {}
+//
+//            if (Pages.homePage.isUserLoggedIn()) {
+//
+//                cookieUtil.saveCookies(Base.driver, cookieFile);
+//
+//            } else {
+//                throw new RuntimeException("Login required!");
+//            }
+//        }
     }
+
     @After
     public void tearDown() {
 
-        if (driver != null) {
-            driver.quit();
-        }
+//        if (Base.driver != null) {
+//            Base.driver.quit();
+//        }
 
         System.out.println("Browser closed");
     }
