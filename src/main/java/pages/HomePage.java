@@ -21,6 +21,7 @@ public class HomePage {
     private WebElement searchBox;
 
     public void searchCourse(String course) throws InterruptedException {
+    	Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(searchBox)).click();
 
         searchBox.clear();

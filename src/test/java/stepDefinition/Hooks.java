@@ -44,8 +44,9 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("user-data-dir=C:\\Users\\Swaathihaa.T.T\\AppData\\Local\\Google\\Chrome\\User Data - Copy");
+        options.addArguments("user-data-dir=C:\\Users\\91934\\AppData\\Local\\Google\\Chrome\\User Data");
         options.addArguments("profile-directory=Default");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--start-maximized");
