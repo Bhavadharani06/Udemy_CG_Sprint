@@ -196,8 +196,7 @@ public class AllFunctionality {
 	// Read property
 	public String getPropertyKeyValue(String key) throws IOException {
 
-		FileInputStream fis = new FileInputStream("./src/main/resources/CommonData/CommonData.properties");
-
+		FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\CommonData\\config.properties");
 		Properties prop = new Properties();
 		prop.load(fis);
 
