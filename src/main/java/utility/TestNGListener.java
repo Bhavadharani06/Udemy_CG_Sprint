@@ -8,6 +8,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+/**
+ * TestNG listener — logs pass/fail/skip into ExtentReports.
+ * Registered in testng.xml.
+ */
 public class TestNGListener implements ITestListener {
 
     @Override
@@ -31,6 +35,7 @@ public class TestNGListener implements ITestListener {
 
         ExtentTest test = ExtentReportManager.getTest();
 
+        // Take screenshot
         try {
             String base64 = ScreenshotUtil.takeScreenshotAsBase64(Base.getDriver());
 

@@ -22,21 +22,24 @@ public class HomePage {
 
     public void searchCourse(String course) throws InterruptedException {
 
-        // 🔥 Step 1: let page load / captcha appear
+    	Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOf(searchBox)).click();
+
+        //  Step 1: let page load / captcha appear
         Thread.sleep(5000);
 
-        // 🔥 Step 2: manual captcha handling (same as your working test)
+        //  Step 2: manual captcha handling (same as your working test)
         if (!driver.getPageSource().toLowerCase().contains("udemy")) {
             System.out.println("If captcha appears, solve it and press ENTER...");
             new java.util.Scanner(System.in).nextLine();
         }
 
-        // 🔥 Step 3: wait for search box safely
+        //  Step 3: wait for search box safely
         WebElement search = wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.name("q"))
         );
 
-        // 🔥 Step 4: perform search
+        //  Step 4: perform search
         search.click();
         search.clear();
         search.sendKeys(course);

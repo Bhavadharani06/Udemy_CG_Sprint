@@ -49,7 +49,9 @@ import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListener.class)
 @CucumberOptions(
+
     features = "src/test/java/features",
+
     glue = "stepDefinition",
 
     tags = "@parallel",   

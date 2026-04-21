@@ -20,6 +20,7 @@ public class Pages {
         homePage = PageFactory.initElements(driver, HomePage.class);
         searchResultsPage = PageFactory.initElements(driver, SearchResultsPage.class);
         cartPage = PageFactory.initElements(driver, CartPage.class);
+        
     }
 
     // ✅ Initialize per thread (call in Hooks)

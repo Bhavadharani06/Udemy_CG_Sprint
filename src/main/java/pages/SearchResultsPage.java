@@ -151,4 +151,12 @@ public class SearchResultsPage {
             return false;
         }
     }
+
+	public boolean isResultsLoaded() {
+		return addToCartBtn.isDisplayed();
+	}
+
+	public boolean isAddToCartVisible() {
+		return addToCartBtn.isDisplayed();
+	}
 }
