@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="5" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-04-21T13:07:56 IST" name="Default suite" finished-at="2026-04-21T13:15:04 IST" duration-ms="427585">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-04-21T13:07:56 IST" name="Default test" finished-at="2026-04-21T13:15:04 IST" duration-ms="427585">
+      <class name="testRunner.RunnerIO">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:07:56 IST" name="setUpClass" finished-at="2026-04-21T13:07:57 IST" duration-ms="198" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@7e19755a]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:07:57 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:08:44 IST" duration-ms="47176" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Search course and verify results"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:08:44 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:09:38 IST" duration-ms="54021" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Open first course and add to cart"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:09:38 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:10:53 IST" duration-ms="75240" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Navigate to instructor profile"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:10:53 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:12:16 IST" duration-ms="82688" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify LinkedIn profile opens"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:12:16 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:13:52 IST" duration-ms="96285" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify YouTube channel opens"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:13:52 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-21T13:15:04 IST" duration-ms="71858" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify behavior for invalid course search"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Udemy Course and Instructor Flow"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[Failed to capture element screenshot]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: Failed to capture element screenshot
+at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:190)
+at stepDefinition.InstructorFlowSteps.verify_invalid_search_message(InstructorFlowSteps.java:99)
+at ✽.An appropriate no results message should be displayed(file:///C:/Udemy_CG_Sprint/src/test/java/features/InstructorFlow.feature:39)
+Caused by: java.io.FileNotFoundException: .\Reports\Invalid_Search_Result_2026-04-21_13-15-04.png (The system cannot find the path specified)
+at java.base/java.io.FileOutputStream.open0(Native Method)
+at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+at org.openqa.selenium.io.FileHandler.copyFile(FileHandler.java:133)
+at org.openqa.selenium.io.FileHandler.copy(FileHandler.java:112)
+at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:188)
+... 2 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:testRunner.RunnerIO@61322f9d]" started-at="2026-04-21T13:15:04 IST" name="tearDownClass" finished-at="2026-04-21T13:15:04 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- testRunner.RunnerIO -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

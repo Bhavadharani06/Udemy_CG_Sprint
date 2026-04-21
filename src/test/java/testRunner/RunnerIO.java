@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-    features = {"src/test/java/featureFiles/add_all_no_duplicates.feature"},
+    features = {"src\\test\\java\\features\\InstructorFlow.feature"},
     glue = "stepDefinition",
     dryRun = false
 )

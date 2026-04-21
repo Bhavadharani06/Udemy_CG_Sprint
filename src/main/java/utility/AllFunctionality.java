@@ -79,8 +79,8 @@ public class AllFunctionality {
 				.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 
-	public static WebElement waitVisible(WebDriver driver, By locator, int sec) {
-		return new WebDriverWait(driver, Duration.ofSeconds(sec)).until(ExpectedConditions.visibilityOf((WebElement) locator));
+	public static WebElement waitVisible(WebDriver driver, WebElement linkedin, int sec) {
+		return new WebDriverWait(driver, Duration.ofSeconds(sec)).until(ExpectedConditions.visibilityOf((WebElement) linkedin));
 	}
 
 	public WebElement waitPresence(WebDriver driver, By locator, int sec) {
@@ -303,26 +303,5 @@ public class AllFunctionality {
 		}
 	}
 	
-	public void waitForCaptchaIfPresent(WebDriver driver) {
-
-	    try {
-	        // Wait up to 60 seconds for page to stabilize
-	        new WebDriverWait(driver, Duration.ofSeconds(60))
-	            .until(d -> {
-	                String url = d.getCurrentUrl();
-	                return !url.contains("captcha") && !url.contains("verify");
-	            });
-
-	        System.out.println("✅ No CAPTCHA or handled");
-
-	    } catch (Exception e) {
-	        System.out.println("⚠ CAPTCHA detected → solve manually");
-	        try {
-	            Thread.sleep(40000); // manual solve time
-	        } catch (InterruptedException ex) {
-	            ex.printStackTrace();
-	        }
-	    }
-	}
 
 }
