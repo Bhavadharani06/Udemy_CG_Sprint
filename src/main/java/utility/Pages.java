@@ -14,12 +14,21 @@ public class Pages {
     public HomePage homePage;
     public SearchResultsPage searchResultsPage;
     public CartPage cartPage;
+    public InstructorHomePage home;
+    public InstructorSearchResultsPage search;
+    public InstructorCoursePage course;
+    public InstructorSocialLinkPage social;
 
     // ✅ Private constructor (per thread)
     private Pages(WebDriver driver) {
         homePage = PageFactory.initElements(driver, HomePage.class);
         searchResultsPage = PageFactory.initElements(driver, SearchResultsPage.class);
         cartPage = PageFactory.initElements(driver, CartPage.class);
+        home = PageFactory.initElements(driver, InstructorHomePage.class);
+        search = PageFactory.initElements(driver, InstructorSearchResultsPage.class);
+        course = PageFactory.initElements(driver, InstructorCoursePage.class);
+        social = PageFactory.initElements(driver, InstructorSocialLinkPage.class);
+     
         
     }
 

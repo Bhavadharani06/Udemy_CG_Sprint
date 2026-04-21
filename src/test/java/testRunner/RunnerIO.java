@@ -49,9 +49,13 @@ import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListener.class)
 @CucumberOptions(
+<<<<<<< HEAD
+    features = {"src\\test\\java\\features\\InstructorFlow.feature"},
+=======
 
     features = "src/test/java/features",
 
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
     glue = "stepDefinition",
 
     tags = "@parallel",   
