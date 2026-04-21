@@ -6,8 +6,8 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -29,10 +29,10 @@ public class SearchSteps extends Base {
     @Given("User is on the Udemy homepage")
     public void userIsOnHomepage() {
 
-        homePage = new HomePage(driver);
+        homePage = new HomePage(Base.getDriver());
 
         Assert.assertFalse(
-                driver.getCurrentUrl().contains("challenge"),
+                Base.getDriver().getCurrentUrl().contains("challenge"),
                 "Captcha not cleared"
         );
 
@@ -49,53 +49,38 @@ public class SearchSteps extends Base {
 
         searchKeyword = util.getDataFromSingleCell(1, 1);
 
-        homePage = new HomePage(driver);
+        homePage = new HomePage(Base.getDriver());
         homePage.searchCourse(searchKeyword);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(d -> d.getCurrentUrl().contains("search"));
-
-        Thread.sleep(3000);
+        new WebDriverWait(Base.getDriver(), Duration.ofSeconds(20))
+                .until(ExpectedConditions.urlContains("search"));
 
         System.out.println("Searched: " + searchKeyword);
+        System.out.println("Current URL: " + Base.getDriver().getCurrentUrl());
     }
 
     @Then("the search results page should display relevant courses")
-    public void searchResultsShouldDisplayCourses() throws InterruptedException {
+    public void searchResultsShouldDisplayCourses() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
-        wait.until(d -> d.getCurrentUrl().contains("search"));
-
-        Thread.sleep(3000);
-
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600)");
-
-        List<WebElement> courses = wait.until(d -> {
-            List<WebElement> list = d.findElements(
-                    By.xpath("//a[contains(@href,'/course/') and contains(@class,'ud-link-neutral')]")
-            );
-            return list.size() > 0 ? list : null;
-        });
+        List<WebElement> courses = new WebDriverWait(Base.getDriver(), Duration.ofSeconds(30))
+                .until(d -> {
+                    List<WebElement> list = d.findElements(
+                            By.xpath("//a[contains(@href,'/course/') and contains(@class,'ud-link-neutral')]")
+                    );
+                    return list.size() >= 2 ? list : null;
+                });
 
         System.out.println("Courses found: " + courses.size());
 
         Assert.assertTrue(courses.size() > 0, "No courses found");
-
-        System.out.println("Results loaded");
     }
 
     @Then("the search results page should display at least 2 courses")
     public void searchResultsAtLeastTwoCourses() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
-        List<WebElement> courses = wait.until(d -> {
-            List<WebElement> list = d.findElements(
-                    By.xpath("//a[contains(@href,'/course/') and contains(@class,'ud-link-neutral')]")
-            );
-            return list.size() > 0 ? list : null;
-        });
+        List<WebElement> courses = Base.getDriver().findElements(
+                By.xpath("//a[contains(@href,'/course/')]")
+        );
 
         System.out.println("Courses found: " + courses.size());
 
@@ -105,14 +90,14 @@ public class SearchSteps extends Base {
     @When("User clicks the first course link and switches to new tab if opened")
     public void clickFirstCourseSwitchTab() throws InterruptedException {
 
-        searchPage = new SearchPage(driver);
+        searchPage = new SearchPage(Base.getDriver());
         searchPage.openFirstCourse();
     }
 
     @When("User clicks the first course link and captures its title")
     public void clickFirstCourseCaptureTitle() throws InterruptedException {
 
-        searchPage = new SearchPage(driver);
+        searchPage = new SearchPage(Base.getDriver());
 
         capturedCourseATitle = searchPage.getCourseTitle(0);
 
@@ -124,7 +109,7 @@ public class SearchSteps extends Base {
     @When("User clicks the first course link")
     public void clickFirstCourseLink() throws InterruptedException {
 
-        searchPage = new SearchPage(driver);
+        searchPage = new SearchPage(Base.getDriver());
         searchPage.openFirstCourse();
     }
 }

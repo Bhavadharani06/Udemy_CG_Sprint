@@ -1,7 +1,7 @@
 # TS_049 – Course Navigation via Thumbnail and URL Validation
 # Test data driven from Excel
 
-@TS_049 @navigation @medium
+@parallel @TS_049 @navigation @medium
 Feature: Course navigation and URL comparison across tabs
 
   Scenario: Open two courses and verify unique URLs

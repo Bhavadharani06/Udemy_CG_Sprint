@@ -46,7 +46,7 @@ public class SignUpSteps {
 	    @Then("User should be redirected to homepage")
 	    public void user_should_be_redirected_to_homepage() {
 
-	        String url = Base.driver.getCurrentUrl();
+	        String url = Base.getDriver().getCurrentUrl();
 
 	        if (url.contains("signupsuccess")) {
 	            System.out.println("✅ Signup success");

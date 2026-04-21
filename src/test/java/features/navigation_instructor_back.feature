@@ -1,7 +1,7 @@
 # ETE_TC_003 – Search → Course Detail → Instructor Profile → Back Navigation
 # Test data driven from Excel
 
-@US_008 @TS_053 @navigation @highh
+@parallel @US_008 @TS_053 @navigation @highh
 Feature: Back navigation retains search results
   
   Scenario: Navigate to instructor profile and validate back navigation

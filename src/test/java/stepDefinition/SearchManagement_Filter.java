@@ -1,22 +1,17 @@
 package stepDefinition;
 
-
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import io.cucumber.java.en.*;
 import pages.*;
 import utility.AllFunctionality;
+import utility.Base;
 import utility.Pages;
 
 public class SearchManagement_Filter {
 
-	WebDriver driver = Hooks.driver;
-
+	WebDriver driver = Base.getDriver();
 	private HomePage home;
 	private SearchResultsPage results;
 	private CartPage cart;
@@ -24,39 +19,36 @@ public class SearchManagement_Filter {
 	@Given("user is on Udemy homepage")
 	public void user_is_on_homepage() {
 
-		driver = Hooks.driver;
+		driver = Base.getDriver();
 
 		if (driver == null) {
 			throw new RuntimeException("Driver is NULL from Hooks ❌");
 		}
 
 		// ✅ USE Pages
-		home = Pages.homePage;
+		home = Pages.get().homePage;
 		Assert.assertTrue(driver.getCurrentUrl().contains("udemy.com"), " Not on Udemy Homepage!");
 	}
 
-	
-		
-		@When("user searches for course at row {int} from sheet {string}")
-		public void user_searches_from_excel(int rowNum, String sheetName) throws Exception {
-			Thread.sleep(5000);
+	@When("user searches for course at row {int} from sheet {string}")
+	public void user_searches_from_excel(int rowNum, String sheetName) throws Exception {
+		Thread.sleep(5000);
 
-		    AllFunctionality util = new AllFunctionality();
-		    String filePath = "./src/test/resources/testdata/TestData.xlsx";
-		    
-		    // Load and Fetch
-		    util.loadExcelFile(filePath, sheetName);
-		    String courseName = util.getDataFromSingleCell(rowNum, 1);
-		    util.closeExcel();
-		    
-		    System.out.println("Excel Data Found: " + courseName);
-		    Assert.assertNotNull(courseName, "Course name fetched from Excel is NULL!");
-		    // Execute Search
-		    home.searchCourse(courseName);
-		    results = Pages.searchResultsPage;
-		    Assert.assertTrue(driver.getCurrentUrl().contains("q="), "Search was not triggered!");
-		}
-	
+		AllFunctionality util = new AllFunctionality();
+		String filePath = "./src/test/resources/testdata/TestData.xlsx";
+
+		// Load and Fetch
+		util.loadExcelFile(filePath, sheetName);
+		String courseName = util.getDataFromSingleCell(rowNum, 1);
+		util.closeExcel();
+
+		System.out.println("Excel Data Found: " + courseName);
+		Assert.assertNotNull(courseName, "Course name fetched from Excel is NULL!");
+		// Execute Search
+		home.searchCourse(courseName);
+		results = Pages.get().searchResultsPage;
+		Assert.assertTrue(driver.getCurrentUrl().contains("q="), "Search was not triggered!");
+	}
 
 	@And("user applies certification, rating and language filters")
 	public void apply_multiple_filters() throws InterruptedException {
@@ -83,7 +75,7 @@ public class SearchManagement_Filter {
 		results.clickAddToCart();
 
 		// ✅ USE Pages
-		cart = Pages.cartPage;
+		cart = Pages.get().cartPage;
 		Assert.assertTrue(results.isAddToCartVisible(), "❌ Add to Cart button is not visible for this course!");
 	}
 
@@ -98,16 +90,18 @@ public class SearchManagement_Filter {
 		Assert.assertTrue(cart.isCourseAdded(), "❌ Course NOT added to cart");
 		System.out.println("✅ Course added successfully");
 	}
-   
+
 	@Then("no courses should be displayed")
 	public void invalid_search() {
 		Assert.assertTrue(results.isNoResultsDisplayed(), "❌ No-results message NOT displayed");
 		System.out.println("✅ No results displayed correctly");
 	}
+
 	@Then("results should be displayed for the searched course")
 	public void verify_results_displayed() {
-	    // Replace with the actual method in your SearchResultsPage that checks if results exist
-	    Assert.assertTrue(results.isResultsLoaded(), "❌ Search results were not displayed!");
-	    System.out.println("✅ Search results verified successfully");
+		// Replace with the actual method in your SearchResultsPage that checks if
+		// results exist
+		Assert.assertTrue(results.isResultsLoaded(), "❌ Search results were not displayed!");
+		System.out.println("✅ Search results verified successfully");
 	}
 }

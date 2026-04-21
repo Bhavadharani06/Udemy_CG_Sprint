@@ -2,75 +2,116 @@ package stepDefinition;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 
 import java.io.FileInputStream;
 import java.time.Duration;
-import java.util.Collections;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
 import utility.Base;
+import utility.ExtentReportManager;
 import utility.Pages;
+import utility.ScreenshotUtil;
+import io.cucumber.java.Scenario;
+import com.aventstack.extentreports.MediaEntityBuilder;
 
 public class Hooks {
+	ExtentReports extent;
+	ExtentTest test;
 
-    public static WebDriver driver;
-    public static Properties prop;
+	public static Properties prop;
 
-    // Load config
-    public void loadConfig() {
+	// Load config
+	public void loadConfig() {
 
-        prop = new Properties();
+		prop = new Properties();
 
-        try {
-            String path = System.getProperty("user.dir")
-                    + "/src/main/resources/CommonData/config.properties";
+		try {
+			String path = System.getProperty("user.dir") + "/src/main/resources/CommonData/config.properties";
 
-            FileInputStream fis = new FileInputStream(path);
-            prop.load(fis);
+			FileInputStream fis = new FileInputStream(path);
+			prop.load(fis);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Before
-    public void setup() {
+	@Before
+	public void setup(Scenario scenario) {
 
-        loadConfig();
+		loadConfig();
 
-        ChromeOptions options = new ChromeOptions();
+		ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("user-data-dir=C:\\Users\\91934\\AppData\\Local\\Google\\Chrome\\User Data");
-        options.addArguments("profile-directory=Default");
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+		// ⚠️ DO NOT USE USER PROFILE (breaks parallel & team setup)
+		// options.addArguments("user-data-dir=...");
+		// options.addArguments("profile-directory=Default");
 
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("--start-maximized");
+		// Optional: helps reduce automation detection
+		options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 
-        driver = new ChromeDriver(options);
+		options.addArguments("--disable-blink-features=AutomationControlled");
+		options.addArguments("--start-maximized");
 
-        
-        Base.driver = driver;
+		WebDriver driver = new ChromeDriver(options);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		// ✅ SET DRIVER IN THREADLOCAL
+		Base.setDriver(driver);
 
-        driver.get(prop.getProperty("url"));
+		Base.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        Pages.initPages(driver);
+		Base.getDriver().get(prop.getProperty("url"));
 
-        System.out.println("Browser launched");
-    }
-    @After
-    public void tearDown() {
+		// ✅ INIT PAGES PER THREAD
+		Pages.initPages(Base.getDriver());
+		// 4. Create Extent test node
+		ExtentTest test = ExtentReportManager.getInstance().createTest(scenario.getName());
+		ExtentReportManager.setTest(test);
+		ExtentReportManager.getTest().info("Test Started: " + scenario.getName());
 
-        if (driver != null) {
-            driver.quit();
-        }
+		System.out.println("Browser launched: " + Thread.currentThread().getId());
+	}
 
-        System.out.println("Browser closed");
-    }
+	@After
+	public void tearDown(Scenario scenario) {
+		ExtentTest test = ExtentReportManager.getTest();
+
+		if (scenario.isFailed()) {
+			// ── Take screenshot and attach to Extent report ──
+			String base64Screenshot = ScreenshotUtil.takeScreenshotAsBase64(Base.getDriver());
+			test.fail("Scenario FAILED: " + scenario.getName(),
+					MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+
+			// ── Also embed in Cucumber HTML report ──
+			byte[] screenshot = ((org.openqa.selenium.TakesScreenshot) Base.getDriver())
+					.getScreenshotAs(org.openqa.selenium.OutputType.BYTES);
+			scenario.attach(screenshot, "image/png", "Failure Screenshot");
+
+		} else {
+			test.pass("Scenario PASSED: " + scenario.getName());
+		}
+
+		if (Base.getDriver() != null) {
+			Base.getDriver().quit();
+			Base.unload();
+			Pages.remove();
+		}
+
+		System.out.println("Browser closed: " + Thread.currentThread().getId());
+
+	}
+
+	@AfterAll
+	public static void afterAll() {
+		ExtentReportManager.flushReports();
+	}
+
 }
