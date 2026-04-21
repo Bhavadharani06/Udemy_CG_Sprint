@@ -1,4 +1,5 @@
 package utility;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -6,14 +7,36 @@ import pages.*;
 
 public class Pages {
 
-    public static HomePage homePage;
-    public static SearchResultsPage searchResultsPage;
-    public static CartPage cartPage;
-   // public static SignupPage signupPage;
+    // ✅ Thread-safe instance
+    private static final ThreadLocal<Pages> INSTANCE = new ThreadLocal<>();
 
-    public static void initPages(WebDriver driver) {
+    // ✅ Page objects (NON-STATIC now)
+    public HomePage homePage;
+    public SearchResultsPage searchResultsPage;
+    public CartPage cartPage;
+
+    // ✅ Private constructor (per thread)
+    private Pages(WebDriver driver) {
         homePage = PageFactory.initElements(driver, HomePage.class);
         searchResultsPage = PageFactory.initElements(driver, SearchResultsPage.class);
         cartPage = PageFactory.initElements(driver, CartPage.class);
+    }
+
+    // ✅ Initialize per thread (call in Hooks)
+    public static void initPages(WebDriver driver) {
+        INSTANCE.set(new Pages(driver));
+    }
+
+    // ✅ Get current thread instance
+    public static Pages get() {
+        if (INSTANCE.get() == null) {
+            throw new RuntimeException("Pages not initialized for this thread!");
+        }
+        return INSTANCE.get();
+    }
+
+    // ✅ Clean up (VERY IMPORTANT)
+    public static void remove() {
+        INSTANCE.remove();
     }
 }

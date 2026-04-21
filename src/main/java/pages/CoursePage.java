@@ -4,23 +4,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utility.AllFunctionality;
-
 public class CoursePage {
 
     WebDriver driver;
-    AllFunctionality util = new AllFunctionality();
 
     public CoursePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-    @FindBy(xpath = "//button[contains(.,'Add to cart') or contains(.,'Add all to cart')]")
-    public WebElement addToCartBtn;
-
-    @FindBy(xpath = "//button[contains(.,'Add all to cart')]")
-    public WebElement addAllToCartBtn;
 
     @FindBy(xpath = "//button[contains(.,'Go to cart')]")
     public WebElement goToCartBtn;
@@ -28,37 +19,48 @@ public class CoursePage {
     @FindBy(tagName = "h1")
     public WebElement courseTitle;
 
-    @FindBy(xpath = "//a[contains(@href,'/user/') or contains(@href,'/instructor/') or contains(@href,'#instructor')]")
+    @FindBy(xpath = "//div[contains(@class,'instructor')]//a")
     public WebElement instructor;
 
-    public void clickAddToCart() throws InterruptedException {
-
-        util.scrollIntoView(driver, addToCartBtn);
-        Thread.sleep(1000);
-
-        try {
-            addToCartBtn.click();
-        } catch (Exception e) {
-            util.clickJS(driver, addToCartBtn);
-        }
-    }
-
+    // ✅ THIS IS YOUR WORKING VERSION
     public void clickAddAllToCart() throws InterruptedException {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-       
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        // scroll a bit (not full bottom)
+        js.executeScript("window.scrollBy(0,600)");
+        Thread.sleep(3000);
+
+        try {
+            WebElement addAll = driver.findElement(
+                    By.xpath("//button[contains(.,'Add all to cart')]")
+            );
+
+            js.executeScript("arguments[0].click();", addAll);
+            System.out.println("✔ Add all to cart clicked");
+
+        } catch (Exception e) {
+
+            System.out.println("⚠ Add all not available, using Add to cart");
+
+            // 🔥 STRONGER LOCATOR (VERY IMPORTANT)
+            WebElement addBtn = driver.findElement(
+                    By.xpath("//button[contains(.,'Add to cart') or contains(.,'Enroll now') or contains(.,'Buy now')]")
+            );
+
+            js.executeScript("arguments[0].click();", addBtn);
+            System.out.println("✔ Add to cart clicked");
+        }
+
         Thread.sleep(2000);
-
-        util.scrollIntoView(driver, addAllToCartBtn);
-        Thread.sleep(1000);
-
-        util.clickJS(driver, addAllToCartBtn);
     }
 
-    public void clickGoToCart() {
+    public void clickGoToCart() throws InterruptedException {
+
         goToCartBtn.click();
+        Thread.sleep(2000);
+
+        System.out.println("✔ Navigated to cart page");
     }
 
     public String getCourseTitle() {
@@ -66,11 +68,33 @@ public class CoursePage {
     }
 
     public String getInstructorName() {
-        return instructor.getText();
+
+        String text = instructor.getText().trim();
+
+        if (text.contains(",")) {
+            text = text.split(",")[0];
+        }
+
+        return text.trim();
     }
 
     public void clickInstructor() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", instructor);
+    }
+    
+    public void clickAddToCart() throws InterruptedException {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        WebElement addBtn = driver.findElement(
+                By.xpath("//button[contains(.,'Add to cart')]")
+        );
+
+        js.executeScript("arguments[0].click();", addBtn);
+
+        System.out.println("✔ Add to cart clicked");
+
+        Thread.sleep(2000);
     }
 }
