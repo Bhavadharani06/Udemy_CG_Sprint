@@ -14,7 +14,7 @@ import org.testng.annotations.Listeners;
 
     glue = "stepDefinition",
 
-    tags = "@parallel",   
+    tags = "@searchfilter",   
 
     plugin = {
         "pretty",
