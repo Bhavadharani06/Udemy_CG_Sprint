@@ -53,13 +53,6 @@ public class CartPage {
         return status;
     }
 
-    public void clearCart() throws InterruptedException {
-        for (WebElement btn : removeButtons) {
-            btn.click();
-            Thread.sleep(1000);
-        }
-    }
-
     public int getCartCount() {
         return cartItems.size();
     }
@@ -80,5 +73,52 @@ public class CartPage {
 
     public boolean isCartEmpty() {
         return driver.getPageSource().toLowerCase().contains("your cart is empty");
+    }
+    
+    public void clickRemove() {
+
+        try {
+            if (removeButtons.size() > 0) {
+
+                WebElement removeBtn = removeButtons.get(0);
+
+                ((JavascriptExecutor) driver)
+                        .executeScript("arguments[0].click();", removeBtn);
+
+                System.out.println("✔ Remove clicked");
+
+                Thread.sleep(2000); // small wait for update
+
+            } else {
+                System.out.println("No remove button found");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error clicking remove: " + e.getMessage());
+        }
+    }
+    
+    public void clearCart() {
+
+        while (true) {
+
+            List<WebElement> buttons = driver.findElements(
+                By.xpath("//button[contains(.,'Remove')]")
+            );
+
+            if (buttons.size() == 0) break;
+
+            try {
+                WebElement btn = buttons.get(0);
+
+                ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", btn);
+
+                Thread.sleep(1500);
+
+            } catch (Exception e) {
+                System.out.println("Retry removing...");
+            }
+        }
     }
 }
