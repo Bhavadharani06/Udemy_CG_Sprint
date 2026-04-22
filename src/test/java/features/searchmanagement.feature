@@ -1,3 +1,4 @@
+@searchfilter
 Feature: Udemy Course Flow (Full Excel Integration)
 
   Background:
