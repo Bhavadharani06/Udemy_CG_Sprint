@@ -12,51 +12,51 @@ import utility.Pages;
 
 public class Explore extends Base{
 	
-	Commonsteps commonsteps=new Commonsteps();
-	CommonstepsPage common = new CommonstepsPage(driver);
+	//Commonsteps commonsteps=new Commonsteps();
+	//CommonstepsPage common = new CommonstepsPage(Base.getDriver());
 	String expectedURL;
 
     // ================= COMMON =================
 
     @Given("User navigates to {string}")
     public void open(String url) {
-        Pages.explorepage.openUrl(url);
+        Pages.get().explorepage.openUrl(url);
     }
 
     @When("User clicks on Explore menu")
     public void clickExplore() {
-    	Pages.explorepage.waitForCloudflare();
-    	Pages.explorepage.clickExplore();
+    	Pages.get().explorepage.waitForCloudflare();
+    	Pages.get().explorepage.clickExplore();
     }
 
     @When("User chooses {string}")
     public void chooseCategory(String cat) {
-    	Pages.explorepage.selectCategory(cat);
+    	Pages.get().explorepage.selectCategory(cat);
     }
 
     @When("User selects subcategory {string}")
     public void selectSub(String sub) {
-    	Pages.explorepage.selectSubCategory(sub);
+    	Pages.get().explorepage.selectSubCategory(sub);
     }
 
     // ================= NAVIGATION =================
 
     @Then("Courses should be displayed")
     public void verifyCourses() {
-        Assert.assertTrue(Pages.explorepage.isCoursesDisplayed());
+        Assert.assertTrue(Pages.get().explorepage.isCoursesDisplayed());
     }
 
     @When("User clicks on the first available course")
     public void clickFirstCourse() {
-    	Pages.explorepage.clickFirstCourse();
+    	Pages.get().explorepage.clickFirstCourse();
     }
 
     @Then("The course page URL should match the selected course URL")
     public void verifyURL() {
-    	Pages.explorepage.switchTab();
+    	Pages.get().explorepage.switchTab();
 
-        String actual = driver.getCurrentUrl().split("\\?")[0];
-        String expected = Pages.explorepage.expectedURL.split("\\?")[0];
+        String actual =Base.getDriver().getCurrentUrl().split("\\?")[0];
+        String expected = Pages.get().explorepage.expectedURL.split("\\?")[0];
 
         Assert.assertEquals(actual, expected);
     }
@@ -65,81 +65,81 @@ public class Explore extends Base{
 
     @Then("Course list should be displayed")
     public void listDisplayed() {
-        Assert.assertTrue(Pages.explorepage.isCoursesDisplayed());
+        Assert.assertTrue(Pages.get().explorepage.isCoursesDisplayed());
     }
 
     @When("User clicks on the first course")
     public void clickCourse() {
-    	Pages.explorepage.clickFirstCourse();
+    	Pages.get().explorepage.clickFirstCourse();
     }
 
     @Then("The opened course title should match the selected course")
     public void verifyTitle() {
-    	Pages.explorepage.switchTab();
-        Assert.assertEquals(Pages.explorepage.getCourseTitle(), Pages.explorepage.expectedTitle);
+    	Pages.get().explorepage.switchTab();
+        Assert.assertEquals(Pages.get().explorepage.getCourseTitle(), Pages.get().explorepage.expectedTitle);
     }
 
     // ================= FILTER =================
 
     @Then("Filtered courses should be displayed")
     public void filters() {
-        Assert.assertTrue(Pages.explorepage.isCoursesDisplayed());
+        Assert.assertTrue(Pages.get().explorepage.isCoursesDisplayed());
     }
 
     // ================= TRENDING =================
 
     @When("User clicks on Trending courses")
     public void trending() {
-    	Pages.explorepage.clickTrending();
+    	Pages.get().explorepage.clickTrending();
     }
 
     @When("User selects the first visible course")
     public void trendingCourse() {
-    	Pages.explorepage.clickFirstCourse();
+    	Pages.get().explorepage.clickFirstCourse();
     }
 
     @Then("User should be navigated to the course detail page")
     public void coursePage() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("course"));
+        Assert.assertTrue(Base.getDriver().getCurrentUrl().contains("course"));
     }
 
     @Then("Course title should match the selected course")
     public void matchTitle() {
-        Assert.assertEquals(Pages.explorepage.getCourseTitle(), Pages.explorepage.expectedTitle);
+        Assert.assertEquals(Pages.get().explorepage.getCourseTitle(), Pages.get().explorepage.expectedTitle);
     }
 
     @When("User clicks on Subscribe\\/Trial button")
     public void subscribe() {
-    	Pages.explorepage.clickSubscribe();
+    	Pages.get().explorepage.clickSubscribe();
     }
 
     @Then("User should be redirected to authentication page")
     public void authPage() {
-        Assert.assertTrue(Pages.explorepage.isOnAuthPage());
+        Assert.assertTrue(Pages.get().explorepage.isOnAuthPage());
     }
 
     // ================= CART =================
 
     @When("User clicks on Explore and selects {string}")
     public void exploreAndSelect(String cat) {
-    	Pages.explorepage.clickExplore();
-    	Pages.explorepage.selectCategory(cat);
+    	Pages.get().explorepage.clickExplore();
+    	Pages.get().explorepage.selectCategory(cat);
     }
 
     @When("User hovers on first course and clicks Add to Cart")
     public void addCart() {
-    	Pages.explorepage.hoverFirstCourse();
-    	Pages.explorepage.clickAddToCart();
+    	Pages.get().explorepage.hoverFirstCourse();
+    	Pages.get().explorepage.clickAddToCart();
     }
 
     @When("User clicks on Go to Cart")
     public void goCart() {
-    	Pages.explorepage.clickGoToCart();
+    	Pages.get().explorepage.clickGoToCart();
     }
 
     @When("User clicks on Proceed to Checkout")
     public void checkout() {
-    	Pages.explorepage.clickCheckout();
+    	Pages.get().explorepage.clickCheckout();
     }
 
     @Then("User enters email from Excel")
@@ -149,7 +149,7 @@ public class Explore extends Base{
         excel.loadExcelFile("src/test/resources/testdata/TestData.xlsx", "Explore");
 
         String email = excel.getDataFromSingleCell(0, 1);
-        Pages.explorepage.enterEmail(email);
+        Pages.get().explorepage.enterEmail(email);
     }
 
 }

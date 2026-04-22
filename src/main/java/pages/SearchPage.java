@@ -33,30 +33,42 @@ public class SearchPage {
     }
 
     //Click first course (with tab handling)
-    public void openFirstCourse() throws InterruptedException {
+    public void openFirstCourse() {
 
-        List<WebElement> courses = getCourses();
+        List<WebElement> courses = driver.findElements(
+                By.xpath("//a[contains(@href,'/course/') and contains(@class,'ud-link-neutral')]")
+        );
 
         String parent = driver.getWindowHandle();
 
-        WebElement firstCourse = courses.get(0);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", courses.get(0));
+        courses.get(0).click();
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);", firstCourse
-        );
-
-        Thread.sleep(1000);
-
-        firstCourse.click();
-
-        Thread.sleep(3000);
-
-        // Switch to new tab if opened
-        for (String w : driver.getWindowHandles()) {
-            if (!w.equals(parent)) {
-                driver.switchTo().window(w);
-                break;
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(parent)) {
+                driver.switchTo().window(handle);
             }
         }
     }
+    
+    public void openCourseByIndex(int index) {
+
+        List<WebElement> courses = driver.findElements(
+                By.xpath("//a[contains(@href,'/course/')]")
+        );
+
+        String parent = driver.getWindowHandle();
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", courses.get(index));
+
+        courses.get(index).click();
+
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(parent)) {
+                driver.switchTo().window(handle);
+            }
+        }
+    }
+    
 }

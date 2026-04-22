@@ -1,7 +1,7 @@
 Feature: Wishlist Management
 
 Background:
-  Given User is on My Learning page
+  Given User is on My Learning page and Wishlist
 
 Scenario: Handle wishlist dynamically
   When User navigates to Wishlist

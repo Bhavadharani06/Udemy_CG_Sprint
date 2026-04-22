@@ -23,8 +23,8 @@ public class CourseSteps extends Base {
         Thread.sleep(3000);
 
         Assert.assertTrue(
-                driver.getCurrentUrl().contains("/course/"),
-                "Not on course detail page: " + driver.getCurrentUrl()
+                Base.getDriver().getCurrentUrl().contains("/course/"),
+                "Not on course detail page: " + Base.getDriver().getCurrentUrl()
         );
     }
 
@@ -33,7 +33,7 @@ public class CourseSteps extends Base {
 
         Thread.sleep(3000);
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
         String title = coursePage.getCourseTitle();
 
         Assert.assertFalse(title.isEmpty(), "Course title empty");
@@ -42,7 +42,7 @@ public class CourseSteps extends Base {
     @When("User scrolls and clicks {string}")
     public void userScrollsAndClicks(String buttonLabel) throws InterruptedException {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
 
         if (buttonLabel.equalsIgnoreCase("Add to cart")) {
             coursePage.clickAddToCart();
@@ -50,15 +50,14 @@ public class CourseSteps extends Base {
             coursePage.clickAddAllToCart();
         }
 
-        Thread.sleep(5000); // ✅ increased wait (important)
+        Thread.sleep(5000);
     }
 
     @Then("the {string} button should appear")
     public void buttonShouldAppear(String buttonLabel) throws InterruptedException {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
 
-        // ❗ FIX: avoid flaky locator failure
         Thread.sleep(5000);
 
         Assert.assertTrue(true, "Skipping strict Go to cart validation for stability");
@@ -67,7 +66,7 @@ public class CourseSteps extends Base {
     @When("User clicks the {string} button")
     public void userClicksButton(String buttonLabel) throws InterruptedException {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
 
         if (buttonLabel.equalsIgnoreCase("Go to cart")) {
             try {
@@ -80,10 +79,10 @@ public class CourseSteps extends Base {
         Thread.sleep(3000);
     }
 
-    @When("User clicks {string}")
+    @When("User clicks {string} on course page")
     public void userClicks(String buttonLabel) throws InterruptedException {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
 
         if (buttonLabel.equalsIgnoreCase("Add to cart")) {
             coursePage.clickAddToCart();
@@ -100,7 +99,7 @@ public class CourseSteps extends Base {
     @Then("the course title should match the selected search result")
     public void courseTitleMatchesSearchResult() {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
         String detailTitle = coursePage.getCourseTitle().toLowerCase();
 
         String capturedTitle = SearchSteps.capturedCourseATitle;
@@ -117,7 +116,7 @@ public class CourseSteps extends Base {
     @Then("User captures Course A URL")
     public void captureCourseAUrl() {
 
-        courseAUrl = driver.getCurrentUrl();
+        courseAUrl = Base.getDriver().getCurrentUrl();
 
         Assert.assertTrue(courseAUrl.contains("/course/"));
     }
@@ -125,13 +124,13 @@ public class CourseSteps extends Base {
     @Then("User should be on the course detail page in the new tab")
     public void userShouldBeOnCourseDetailInNewTab() {
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("/course/"));
+        Assert.assertTrue(Base.getDriver().getCurrentUrl().contains("/course/"));
     }
 
     @Then("User captures Course B URL")
     public void captureCourseBUrl() {
 
-        courseBUrl = driver.getCurrentUrl();
+        courseBUrl = Base.getDriver().getCurrentUrl();
 
         Assert.assertTrue(courseBUrl.contains("/course/"));
     }

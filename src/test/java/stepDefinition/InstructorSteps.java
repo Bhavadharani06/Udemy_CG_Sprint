@@ -16,9 +16,8 @@ public class InstructorSteps extends Base {
     @When("User captures and clicks the instructor link")
     public void captureAndClickInstructor() throws InterruptedException {
 
-        coursePage = new CoursePage(driver);
+        coursePage = new CoursePage(Base.getDriver());
 
-        // wait before accessing
         Thread.sleep(3000);
 
         capturedInstructorName = coursePage.getInstructorName();
@@ -29,8 +28,7 @@ public class InstructorSteps extends Base {
 
         System.out.println("✔ Instructor captured: " + capturedInstructorName);
 
-        // scroll properly
-        ((org.openqa.selenium.JavascriptExecutor) driver)
+        ((org.openqa.selenium.JavascriptExecutor) Base.getDriver())
                 .executeScript("arguments[0].scrollIntoView(true);",
                         coursePage.instructor);
 
@@ -48,7 +46,7 @@ public class InstructorSteps extends Base {
 
         try {
             new org.openqa.selenium.support.ui.WebDriverWait(
-                    driver, java.time.Duration.ofSeconds(10))
+                    Base.getDriver(), java.time.Duration.ofSeconds(10))
                     .until(org.openqa.selenium.support.ui.ExpectedConditions
                             .urlContains("user"));
             profileOpened = true;
@@ -58,19 +56,19 @@ public class InstructorSteps extends Base {
 
         if (profileOpened) {
 
-            Assert.assertTrue(driver.getCurrentUrl().contains("user"));
+            Assert.assertTrue(Base.getDriver().getCurrentUrl().contains("user"));
 
         } else {
 
             String firstName = capturedInstructorName.split(" ")[0];
 
             try {
-                ((org.openqa.selenium.JavascriptExecutor) driver)
+                ((org.openqa.selenium.JavascriptExecutor) Base.getDriver())
                         .executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
                 org.openqa.selenium.WebElement section =
                         new org.openqa.selenium.support.ui.WebDriverWait(
-                                driver, java.time.Duration.ofSeconds(10))
+                                Base.getDriver(), java.time.Duration.ofSeconds(10))
                                 .until(org.openqa.selenium.support.ui.ExpectedConditions
                                         .visibilityOfElementLocated(
                                                 org.openqa.selenium.By.xpath(
@@ -87,12 +85,12 @@ public class InstructorSteps extends Base {
     @Then("the instructor name should match the course detail page")
     public void instructorNameShouldMatch() {
 
-        if (!driver.getCurrentUrl().contains("user")) {
+        if (!Base.getDriver().getCurrentUrl().contains("user")) {
             System.out.println("⚠ Scroll case — skipping name match");
             return;
         }
 
-        instructorPage = new InstructorPage(driver);
+        instructorPage = new InstructorPage(Base.getDriver());
 
         String profileName = instructorPage.getInstructorHeader().trim();
 
@@ -101,10 +99,9 @@ public class InstructorSteps extends Base {
         System.out.println("Course: " + capturedInstructorName);
         System.out.println("Profile: " + profileName);
 
-        // Soft check (first name only)
         Assert.assertTrue(
-            profileName.toLowerCase().contains(key),
-            "Instructor mismatch"
+                profileName.toLowerCase().contains(key),
+                "Instructor mismatch"
         );
     }
 }
