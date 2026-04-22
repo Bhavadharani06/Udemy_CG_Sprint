@@ -15,23 +15,28 @@ import utility.AllFunctionality;
 public class InstructorFlowSteps extends Base {
 
     AllFunctionality func = new AllFunctionality();
-    WebDriverWait wait = new WebDriverWait(Base.getDriver(), Duration.ofSeconds(30));
+    ScreenshotUtil scr=new ScreenshotUtil();
 
     @Given("User launches the browser")
     public void user_launches_the_browser() {
         // Initialize the report
+     
+        // ✅ Use getDriver() to verify the specific thread's browser
         Assert.assertNotNull(Base.getDriver(), "❌ Driver initialization failed.");
     }
 
     @Given("User navigates to Udemy website")
     public void user_navigates_to_udemy_website() {
+        // ✅ Pass getDriver() into the utility method
         func.openURL(Base.getDriver(), "https://www.udemy.com/");
     }
 
     @When("User searches for {string}")
     public void user_searches_for(String courseName) throws InterruptedException {
+        // ✅ Use Pages.get() to ensure page objects are thread-local
         Pages.get().home.searchCourse(courseName);
-        System.out.println("🔍 Searching for: " + courseName);
+        System.out.println("🔍 Thread ID [" + Thread.currentThread().getId() + "] searching: " + courseName);
+        
         // Manual Captcha Bypass
         Thread.sleep(30000); 
     }
@@ -73,6 +78,7 @@ public class InstructorFlowSteps extends Base {
 
     @Then("LinkedIn page should open in a new tab")
     public void linkedin_opened() {
+        // Validation updated to use thread-safe driver
         Assert.assertTrue(func.getCurrentURL(Base.getDriver()).contains("/user/"), "❌ Failed to return to profile.");
     }
 
@@ -89,19 +95,18 @@ public class InstructorFlowSteps extends Base {
 
     @Then("An appropriate no results message should be displayed")
     public void verify_invalid_search_message() throws IOException {
-        // 1. Locator for Udemy's 'No results' state
+        // ✅ Local WebDriverWait ensures it only watches this thread's browser
+        WebDriverWait wait = new WebDriverWait(Base.getDriver(), Duration.ofSeconds(30));
+        
         By noResultsLocator = By.xpath("//h1[contains(text(),'Sorry')] | //div[contains(text(),'could not find')]");
         
-        // 2. Verification
         boolean isVisible = wait.until(ExpectedConditions.visibilityOfElementLocated(noResultsLocator)).isDisplayed();
-        Assert.assertTrue(isVisible, "❌ No results message missing for invalid search!");
+        Assert.assertTrue(isVisible, "❌ No results message missing!");
         
-        // 3. Take Screenshot for the final project report
-        String path = ScreenshotUtil.takeScreenshot(Base.getDriver(), "Invalid_Search_Result");
-        System.out.println("📸 Screenshot saved at: " + path);
+        // Take Screenshot
+        String path = scr.takeScreenshot(Base.getDriver(), "Invalid_Search_Result");
+        System.out.println("📸 Screenshot saved for Thread: " + Thread.currentThread().getId());
         
-        // 4. Finalize Extent Report
-//        AllFunctionality.getExtentReports().flush();
-//        System.out.println("✅ Testing Finished. Report and Screenshots generated in /Reports folder.");
+       
     }
 }

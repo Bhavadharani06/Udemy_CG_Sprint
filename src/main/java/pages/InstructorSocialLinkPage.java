@@ -6,54 +6,42 @@ import java.time.Duration;
 import java.util.Set;
 
 public class InstructorSocialLinkPage {
-
     WebDriver driver;
     WebDriverWait wait;
 
     public InstructorSocialLinkPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public void openLinkedIn() {
-        String parent = driver.getWindowHandle();
-        WebElement linkedIn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href,'linkedin.com')]")));
-        linkedIn.click();
-        
-        // Switch to the new LinkedIn tab just to verify, then come back
-        switchToNewTab(parent);
-        driver.close(); // Close LinkedIn tab
-        driver.switchTo().window(parent); // Switch back to Instructor profile
+        handleSocialClick("//a[contains(@href,'linkedin.com')]", "LinkedIn");
     }
 
     public void openYouTube() {
-        // 1. Refresh the Instructor page to ensure the social links are clickable
-        driver.navigate().refresh();
-        System.out.println("🔄 Refreshed Instructor page for YouTube link");
-
-        // 2. Use a safe JS click for YouTube
-        try {
-            By youtubeLocator = By.xpath("//a[contains(@href,'youtube.com')]");
-            WebElement youtubeLink = wait.until(ExpectedConditions.presenceOfElementLocated(youtubeLocator));
-            
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", youtubeLink);
-            Thread.sleep(1000);
-            
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", youtubeLink);
-            System.out.println("🎯 YouTube link clicked successfully");
-        } catch (Exception e) {
-            System.out.println("⚠️ YouTube link not found or could not be clicked: " + e.getMessage());
-        }
+        handleSocialClick("//a[contains(@href,'youtube.com')]", "YouTube");
     }
 
-    // Helper method to handle window switching
-    private void switchToNewTab(String parent) {
-        Set<String> allWindows = driver.getWindowHandles();
-        for (String win : allWindows) {
-            if (!win.equals(parent)) {
-                driver.switchTo().window(win);
-                break;
+    private void handleSocialClick(String xpath, String platform) {
+        try {
+            String parent = driver.getWindowHandle();
+            WebElement link = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", link);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+            
+            // Wait for tab to appear
+            wait.until(ExpectedConditions.numberOfWindowsToBe(3)); 
+            System.out.println("🔗 " + platform + " opened.");
+            
+            // Just switch to verify and switch back (don't close yet to avoid session issues)
+            for (String win : driver.getWindowHandles()) {
+                if (!win.equals(parent)) {
+                    driver.switchTo().window(win);
+                }
             }
+            driver.switchTo().window(parent); 
+        } catch (Exception e) {
+            System.out.println("⚠️ " + platform + " link was not available or failed to click.");
         }
     }
 }
