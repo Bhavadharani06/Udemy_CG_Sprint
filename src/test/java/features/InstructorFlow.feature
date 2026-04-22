@@ -1,3 +1,4 @@
+@Instructor_parallel
 Feature: Udemy Course and Instructor Flow
 
   Background: 
