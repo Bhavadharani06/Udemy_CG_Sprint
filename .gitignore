@@ -1,19 +1,5 @@
-<<<<<<< HEAD
-/target/
-=======
-<<<<<<< HEAD
-target/
-test-output/
-*.class
-cookies.data
-=======
-<<<<<<< HEAD
 target/
 test-output/
 *.class
 *.log
-=======
-/target/
->>>>>>> 6cb6a363848eb6dbc5c2ec36945e44d33995ab89
->>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
->>>>>>> 0fa9360902e527b6cf0f69d16beb8f3443a52d75
+cookies.data
