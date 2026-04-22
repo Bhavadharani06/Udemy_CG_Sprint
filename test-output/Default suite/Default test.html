@@ -55,11 +55,27 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
+<<<<<<< HEAD
 <td>Tests passed/Failed/Skipped:</td><td>3/3/0</td>
+=======
+<<<<<<< HEAD
+<td>Tests passed/Failed/Skipped:</td><td>5/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Apr 21 13:07:56 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>427 seconds (427585 ms)</td>
+=======
+<td>Tests passed/Failed/Skipped:</td><td>2/4/0</td>
+>>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
 </tr><tr>
 <td>Started on:</td><td>Tue Apr 21 10:34:45 IST 2026</td>
 </tr>
+<<<<<<< HEAD
 <tr><td>Total time:</td><td>411 seconds (411639 ms)</td>
+=======
+<tr><td>Total time:</td><td>364 seconds (364005 ms)</td>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
+>>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,6 +92,39 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify behavior for invalid course search", "Udemy Course and Instructor Flow"</td>
+<td><div><pre>java.lang.RuntimeException: Failed to capture element screenshot
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:190)
+	at stepDefinition.InstructorFlowSteps.verify_invalid_search_message(InstructorFlowSteps.java:99)
+	at ✽.An appropriate no results message should be displayed(file:///C:/Udemy_CG_Sprint/src/test/java/features/InstructorFlow.feature:39)
+Caused by: java.io.FileNotFoundException: .\Reports\Invalid_Search_Result_2026-04-21_13-15-04.png (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:179)
+	at org.openqa.selenium.io.FileHandler.copyFile(FileHandler.java:133)
+	at org.openqa.selenium.io.FileHandler.copy(FileHandler.java:112)
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:188)
+	... 2 more
+</pre></div><a href='#' onClick='toggleBox("stack-trace399715995", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace399715995'><pre>java.lang.RuntimeException: Failed to capture element screenshot
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:190)
+	at stepDefinition.InstructorFlowSteps.verify_invalid_search_message(InstructorFlowSteps.java:99)
+	at ✽.An appropriate no results message should be displayed(file:///C:/Udemy_CG_Sprint/src/test/java/features/InstructorFlow.feature:39)
+Caused by: java.io.FileNotFoundException: .\Reports\Invalid_Search_Result_2026-04-21_13-15-04.png (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:179)
+	at org.openqa.selenium.io.FileHandler.copyFile(FileHandler.java:133)
+	at org.openqa.selenium.io.FileHandler.copy(FileHandler.java:112)
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:188)
+	... 2 more
+</pre></div></td>
+<td>71</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+=======
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Enroll in free course from Excel", "Udemy Course Flow (Full Excel Integration)"</td>
 <td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //strong[.=&apos;All filters&apos;]&apos; (tried for 40 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
@@ -315,8 +364,78 @@ Session ID: c5242a84122ae76d88885f194ee04e3e
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
 	... 3 more
 </pre></div></td>
+<<<<<<< HEAD
 <td>83</td>
 <td>testRunner.RunnerIO@79d8407f</td></tr>
+=======
+<td>73</td>
+<td>testRunner.RunnerIO@710f4dc7</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify search results for miscellaneous course", "Udemy Course Flow (Full Excel Integration)"</td>
+<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;(//button[.=&apos;Add to cart&apos;])[1]&quot;}
+  (Session info: chrome=147.0.7727.101)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c49367822539cabd6d93c2f60b34ea20, findElement {value=(//button[.=&apos;Add to cart&apos;])[1], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.101, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91934\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56713}, goog:processID: 14948, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56713/devtoo..., se:cdpVersion: 147.0.7727.101, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c49367822539cabd6d93c2f60b34ea20
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at jdk.proxy2/jdk.proxy2.$Proxy24.isDisplayed(Unknown Source)
+	at pages.SearchResultsPage.isResultsLoaded(SearchResultsPage.java:156)
+	at stepDefinition.SearchManagement_Filter.verify_results_displayed(SearchManagement_Filter.java:110)
+	at ✽.results should be displayed for the searched course(file:///C:/Udemy_CG_Sprint/src/test/java/features/searchmanagement.feature:39)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1760493989", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1760493989'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;(//button[.=&apos;Add to cart&apos;])[1]&quot;}
+  (Session info: chrome=147.0.7727.101)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c49367822539cabd6d93c2f60b34ea20, findElement {value=(//button[.=&apos;Add to cart&apos;])[1], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.101, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91934\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56713}, goog:processID: 14948, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56713/devtoo..., se:cdpVersion: 147.0.7727.101, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c49367822539cabd6d93c2f60b34ea20
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at jdk.proxy2/jdk.proxy2.$Proxy24.isDisplayed(Unknown Source)
+	at pages.SearchResultsPage.isResultsLoaded(SearchResultsPage.java:156)
+	at stepDefinition.SearchManagement_Filter.verify_results_displayed(SearchManagement_Filter.java:110)
+	at ✽.results should be displayed for the searched course(file:///C:/Udemy_CG_Sprint/src/test/java/features/searchmanagement.feature:39)
+</pre></div></td>
+<td>30</td>
+<td>testRunner.RunnerIO@710f4dc7</td></tr>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
+>>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -327,6 +446,32 @@ Session ID: c5242a84122ae76d88885f194ee04e3e
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Open first course and add to cart", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>54</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Navigate to instructor profile", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>75</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Search course and verify results", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>47</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify LinkedIn profile opens", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>82</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify YouTube channel opens", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>96</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+=======
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Add various courses to cart from Excel", "Udemy Course Flow (Full Excel Integration)"</td>
 <td></td>
 <td>70</td>
@@ -339,8 +484,14 @@ Session ID: c5242a84122ae76d88885f194ee04e3e
 <tr>
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Clear filters and add to cart from Excel", "Udemy Course Flow (Full Excel Integration)"</td>
 <td></td>
+<<<<<<< HEAD
 <td>50</td>
 <td>testRunner.RunnerIO@79d8407f</td></tr>
+=======
+<td>49</td>
+<td>testRunner.RunnerIO@710f4dc7</td></tr>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
+>>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
 </table><p>
 </body>
 </html>

@@ -1,7 +1,7 @@
 # US_007, US_008 | TS_042, TS_044, TS_053 – Cart Persistence After Navigation
 # Test data driven from Excel
 
-@TS_044 @cart @navigation @high
+@parallel @TS_044 @cart @navigation @high
 Feature: Cart Persistence After Back Navigation and Refresh
 
   Scenario: Verify cart count persists after navigation and refresh
