@@ -1,3 +1,4 @@
+@signup
 Feature: User Signup on Udemy
 
   Scenario: Successful signup with valid details
@@ -6,7 +7,8 @@ Feature: User Signup on Udemy
     And navigate to udemy using url "https://www.udemy.com/"
     
     When User clicks on Sign Up
-    And User enters valid name "Dharani" and email "dharanivedha26@gmail.com"
+    And User enters valid name "Bhavadharani" and email "dharanivedha06@gmail.com"
+
     And User clicks Continue
     
     Then Verification code should be sent to registered email

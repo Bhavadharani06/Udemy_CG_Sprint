@@ -6,8 +6,13 @@
       <class name="testRunner.RunnerIO">
         <methods>
           <include name="setUpClass"/>
+<<<<<<< HEAD
+          <include name="runScenario" invocation-numbers="5"/>
+          <include name="tearDownClass"/>
+=======
           <include name="tearDownClass"/>
           <include name="runScenario" invocation-numbers="1 2 4 5"/>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
         </methods>
       </class> <!-- testRunner.RunnerIO -->
     </classes>

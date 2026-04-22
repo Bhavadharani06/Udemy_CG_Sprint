@@ -55,11 +55,19 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
+<<<<<<< HEAD
+<td>Tests passed/Failed/Skipped:</td><td>5/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Apr 21 13:07:56 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>427 seconds (427585 ms)</td>
+=======
 <td>Tests passed/Failed/Skipped:</td><td>2/4/0</td>
 </tr><tr>
 <td>Started on:</td><td>Mon Apr 20 21:53:06 IST 2026</td>
 </tr>
 <tr><td>Total time:</td><td>364 seconds (364005 ms)</td>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,6 +84,39 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify behavior for invalid course search", "Udemy Course and Instructor Flow"</td>
+<td><div><pre>java.lang.RuntimeException: Failed to capture element screenshot
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:190)
+	at stepDefinition.InstructorFlowSteps.verify_invalid_search_message(InstructorFlowSteps.java:99)
+	at ✽.An appropriate no results message should be displayed(file:///C:/Udemy_CG_Sprint/src/test/java/features/InstructorFlow.feature:39)
+Caused by: java.io.FileNotFoundException: .\Reports\Invalid_Search_Result_2026-04-21_13-15-04.png (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:179)
+	at org.openqa.selenium.io.FileHandler.copyFile(FileHandler.java:133)
+	at org.openqa.selenium.io.FileHandler.copy(FileHandler.java:112)
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:188)
+	... 2 more
+</pre></div><a href='#' onClick='toggleBox("stack-trace399715995", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace399715995'><pre>java.lang.RuntimeException: Failed to capture element screenshot
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:190)
+	at stepDefinition.InstructorFlowSteps.verify_invalid_search_message(InstructorFlowSteps.java:99)
+	at ✽.An appropriate no results message should be displayed(file:///C:/Udemy_CG_Sprint/src/test/java/features/InstructorFlow.feature:39)
+Caused by: java.io.FileNotFoundException: .\Reports\Invalid_Search_Result_2026-04-21_13-15-04.png (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:179)
+	at org.openqa.selenium.io.FileHandler.copyFile(FileHandler.java:133)
+	at org.openqa.selenium.io.FileHandler.copy(FileHandler.java:112)
+	at utility.AllFunctionality.captureScreenshot(AllFunctionality.java:188)
+	... 2 more
+</pre></div></td>
+<td>71</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+=======
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Enroll in free course from Excel", "Udemy Course Flow (Full Excel Integration)"</td>
 <td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //strong[.=&apos;All filters&apos;]&apos; (tried for 40 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
@@ -381,6 +422,7 @@ Session ID: c49367822539cabd6d93c2f60b34ea20
 </pre></div></td>
 <td>30</td>
 <td>testRunner.RunnerIO@710f4dc7</td></tr>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -391,6 +433,32 @@ Session ID: c49367822539cabd6d93c2f60b34ea20
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Open first course and add to cart", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>54</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Navigate to instructor profile", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>75</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Search course and verify results", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>47</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify LinkedIn profile opens", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>82</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify YouTube channel opens", "Udemy Course and Instructor Flow"</td>
+<td></td>
+<td>96</td>
+<td>testRunner.RunnerIO@61322f9d</td></tr>
+=======
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Add various courses to cart from Excel", "Udemy Course Flow (Full Excel Integration)"</td>
 <td></td>
 <td>44</td>
@@ -400,6 +468,7 @@ Session ID: c49367822539cabd6d93c2f60b34ea20
 <td></td>
 <td>49</td>
 <td>testRunner.RunnerIO@710f4dc7</td></tr>
+>>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
 </table><p>
 </body>
 </html>

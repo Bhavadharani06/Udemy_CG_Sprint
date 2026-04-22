@@ -21,16 +21,54 @@ public class HomePage {
     private WebElement searchBox;
 
     public void searchCourse(String course) throws InterruptedException {
+
     	Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(searchBox)).click();
 
-        searchBox.clear();
-        searchBox.sendKeys(course, Keys.ENTER);
+        //  Step 1: let page load / captcha appear
+        Thread.sleep(5000);
 
-        Thread.sleep(5000); // (can improve later)
+        //  Step 2: manual captcha handling (same as your working test)
+        if (!driver.getPageSource().toLowerCase().contains("udemy")) {
+            System.out.println("If captcha appears, solve it and press ENTER...");
+            new java.util.Scanner(System.in).nextLine();
+        }
+
+        //  Step 3: wait for search box safely
+        WebElement search = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.name("q"))
+        );
+
+        //  Step 4: perform search
+        search.click();
+        search.clear();
+        search.sendKeys(course);
+        search.sendKeys(Keys.ENTER);
+
+        Thread.sleep(4000); // stability for demo
     }
 
     public String getSearchText() {
         return searchBox.getAttribute("value");
     }
+    
+    
+    @FindBy(xpath = "//a[@aria-label='My profile']")
+    private WebElement profileImg;
+    
+    public WebElement getProfileImg() {
+        return profileImg;
+    }
+    
+    public boolean isUserLoggedIn() {
+	    try {
+	        // Use a 5-10 second wait instead of immediate check
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	        return wait.until(ExpectedConditions.visibilityOf(getProfileImg())).isDisplayed();
+	    } catch (Exception e) {
+	        System.out.println("Profile image not found - user not logged in.");
+	        return false;
+	    }
+	}
+    
 }
