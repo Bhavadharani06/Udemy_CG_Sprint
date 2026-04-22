@@ -4,9 +4,10 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-    features = {"src/test/java/featureFiles/add_all_no_duplicates.feature"},
+    features = {"src\\test\\java\\features\\Explore.feature"},
     glue = "stepDefinition",
-    dryRun = false
+    dryRun = false,tags="@navigation and @url",
+    monochrome = true
 )
 public class RunnerIO extends AbstractTestNGCucumberTests {
 

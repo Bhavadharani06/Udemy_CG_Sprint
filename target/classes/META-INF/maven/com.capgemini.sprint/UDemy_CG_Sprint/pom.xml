@@ -91,6 +91,12 @@
 			<version>7.14.0</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.panimalar</groupId>
+			<artifactId>SeleniumGrid</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		
   </dependencies>
 </project>
