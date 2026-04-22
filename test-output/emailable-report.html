@@ -10,6 +10,21 @@
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default suite</th></tr>
 <<<<<<< HEAD
+<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">36,424</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">testRunner.RunnerIO</td><td><a href="#m0">runScenario</a></td><td rowspan="1">1776829600552</td><td rowspan="1">35970</td></tr></tbody>
+</table>
+<h2>Default test</h2><h3 id="m0">testRunner.RunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Check and validate for multiple categories&quot;</td><td>&quot;Udemy End-to-End Validation Suite&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=147.0.7727.102)
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.5&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b608ef1e415cf0af0809bc76f866bbd6, findElement {using=xpath, value=//div[contains(@class,&apos;popover&apos;)]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.102, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\kirut\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56926}, goog:processID: 13784, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56926/devtoo..., se:cdpVersion: 147.0.7727.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b608ef1e415cf0af0809bc76f866bbd6
+=======
+<<<<<<< HEAD
 <tr><td><a href="#t0">Default test</a></td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num attn">3</td><td class="num">411,639</td><td></td><td></td></tr>
 =======
 <<<<<<< HEAD
@@ -58,6 +73,7 @@ Driver info: org.openqa.selenium.chrome.ChromeDriver
 Command: [4b55e96f547e938eab814b74e53f9f70, findElement {value=//strong[.=&apos;All filters&apos;], using=xpath}]
 Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.101, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91934\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53767}, goog:processID: 18684, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53767/devtoo..., se:cdpVersion: 147.0.7727.101, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
 Session ID: 4b55e96f547e938eab814b74e53f9f70
+>>>>>>> 0fa9360902e527b6cf0f69d16beb8f3443a52d75
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
@@ -72,6 +88,15 @@ Session ID: 4b55e96f547e938eab814b74e53f9f70
 	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+<<<<<<< HEAD
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at pages.ExplorePage.selectSubCategory(ExplorePage.java:87)
+	at stepDefinition.Explore.selectSub(Explore.java:39)
+	at ✽.User selects subcategory &quot;IT Certifications&quot;(file:///C:/Udemy_CG_Sprint/src/test/java/features/Explore.feature:16)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+=======
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
 	at jdk.proxy2/jdk.proxy2.$Proxy24.isDisplayed(Unknown Source)
@@ -161,5 +186,6 @@ Session ID: c5242a84122ae76d88885f194ee04e3e
 <h3 id="m4">testRunner.RunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify search results for miscellaneous course&quot;</td><td>&quot;Udemy Course Flow (Full Excel Integration)&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 <h3 id="m5">testRunner.RunnerIO#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Clear filters and add to cart from Excel&quot;</td><td>&quot;Udemy Course Flow (Full Excel Integration)&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 >>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
+>>>>>>> 0fa9360902e527b6cf0f69d16beb8f3443a52d75
 </body>
 </html>

@@ -56,6 +56,13 @@ function toggleAllBoxes() {
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
 <<<<<<< HEAD
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Wed Apr 22 09:16:40 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>36 seconds (36424 ms)</td>
+=======
+<<<<<<< HEAD
 <td>Tests passed/Failed/Skipped:</td><td>3/3/0</td>
 =======
 <<<<<<< HEAD
@@ -76,6 +83,7 @@ function toggleAllBoxes() {
 <tr><td>Total time:</td><td>364 seconds (364005 ms)</td>
 >>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
 >>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
+>>>>>>> 0fa9360902e527b6cf0f69d16beb8f3443a52d75
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -92,6 +100,71 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<<<<<<< HEAD
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Check and validate for multiple categories", "Udemy End-to-End Validation Suite"</td>
+<td><div><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=147.0.7727.102)
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.5&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b608ef1e415cf0af0809bc76f866bbd6, findElement {using=xpath, value=//div[contains(@class,&apos;popover&apos;)]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.102, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\kirut\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56926}, goog:processID: 13784, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56926/devtoo..., se:cdpVersion: 147.0.7727.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b608ef1e415cf0af0809bc76f866bbd6
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at pages.ExplorePage.selectSubCategory(ExplorePage.java:87)
+	at stepDefinition.Explore.selectSub(Explore.java:39)
+	at ✽.User selects subcategory &quot;IT Certifications&quot;(file:///C:/Udemy_CG_Sprint/src/test/java/features/Explore.feature:16)
+</pre></div><a href='#' onClick='toggleBox("stack-trace284034271", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace284034271'><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=147.0.7727.102)
+Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.5&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b608ef1e415cf0af0809bc76f866bbd6, findElement {using=xpath, value=//div[contains(@class,&apos;popover&apos;)]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.102, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\kirut\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56926}, goog:processID: 13784, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56926/devtoo..., se:cdpVersion: 147.0.7727.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b608ef1e415cf0af0809bc76f866bbd6
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at pages.ExplorePage.selectSubCategory(ExplorePage.java:87)
+	at stepDefinition.Explore.selectSub(Explore.java:39)
+	at ✽.User selects subcategory &quot;IT Certifications&quot;(file:///C:/Udemy_CG_Sprint/src/test/java/features/Explore.feature:16)
+</pre></div></td>
+<td>35</td>
+<td>testRunner.RunnerIO@c0c2f8d</td></tr>
+=======
 <<<<<<< HEAD
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify behavior for invalid course search", "Udemy Course and Instructor Flow"</td>
 <td><div><pre>java.lang.RuntimeException: Failed to capture element screenshot
@@ -492,6 +565,7 @@ Session ID: c49367822539cabd6d93c2f60b34ea20
 <td>testRunner.RunnerIO@710f4dc7</td></tr>
 >>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
 >>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
+>>>>>>> 0fa9360902e527b6cf0f69d16beb8f3443a52d75
 </table><p>
 </body>
 </html>
