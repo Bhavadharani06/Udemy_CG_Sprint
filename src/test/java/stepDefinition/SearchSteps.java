@@ -49,6 +49,11 @@ public class SearchSteps extends Base {
 
         searchKeyword = util.getDataFromSingleCell(1, 1);
 
+        String baseUrl = util.getPropertyKeyValue("url");
+        Base.getDriver().get(baseUrl);
+
+        Thread.sleep(3000);
+
         homePage = new HomePage(Base.getDriver());
         homePage.searchCourse(searchKeyword);
 

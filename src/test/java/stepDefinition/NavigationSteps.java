@@ -107,4 +107,5 @@ public class NavigationSteps extends Base {
 
         System.out.println("Multiple tabs verified");
     }
+    
 }
