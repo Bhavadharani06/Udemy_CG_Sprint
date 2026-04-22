@@ -31,5 +31,6 @@ public class Pages {
         archivePage = PageFactory.initElements(driver, ArchivePage.class);
         learningToolsPage = PageFactory.initElements(driver, LearningToolsPage.class);
         allCoursesPage = PageFactory.initElements(driver, AllCoursesPage.class);
+        
 	}
 }

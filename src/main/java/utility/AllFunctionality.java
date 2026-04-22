@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -169,28 +170,7 @@ public class AllFunctionality {
 		act.perform();
 	}
 
-	// SCREENSHOT
-	// Capture Web page
-	public String captureScreenshot(WebDriver driver, String testName) throws IOException {
-		// Creating a method for time-stamp
-		String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-
-		File dir = new File("./Reports/");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-
-		String path = "./Reports/" + testName + "_" + timestamp + ".png";
-
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File temp = ts.getScreenshotAs(OutputType.FILE);
-		try {
-			FileHandler.copy(temp, new File(path));
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to capture element screenshot", e);
-		}
-		return path;
-	}
+	
 
 	// FILE PROPERTIES
 	// Read property
@@ -324,5 +304,5 @@ public class AllFunctionality {
 	        }
 	    }
 	}
-
+	
 }

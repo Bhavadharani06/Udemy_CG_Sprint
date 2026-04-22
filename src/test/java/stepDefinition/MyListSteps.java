@@ -21,7 +21,6 @@ public class MyListSteps {
 		Pages.signUpPage.waitForOTP();
 		Pages.signUpPage.clickFinalSignUp();
 		System.out.println("SignUp Successfully");
-		Pages.homePage.getMyLearning().click();
 		System.out.println("Clicking on My Learning...");
 
 	}

@@ -9,124 +9,133 @@ import utility.Base;
 
 public class MyListPage {
 
-    WebDriver driver;
+	WebDriver driver;
 
-    public MyListPage(WebDriver driver) {
-        this.driver = driver;
-    }
+	public MyListPage(WebDriver driver) {
+		this.driver = driver;
+	}
 
-    // ================= LOCATORS =================
+	// ================= LOCATORS =================
 
-    // My List tab
-    By myListTab = By.xpath("//a[contains(@href,'lists')]");
+	// My List tab
+	By myListTab = By.xpath("//a[contains(@href,'lists')]");
 
-    // Empty list message
-    By emptyListMsg = By.xpath("//h3[contains(text(),'Organize and access')]");
+	// Empty list message
+	By emptyListMsg = By.xpath("//h3[contains(text(),'Organize and access')]");
 
-    // All Courses link
-    By allCourses = By.xpath("//a[contains(@href,'/home/my-courses') and .='Go to the All Courses tab']");
+	// All Courses link
+	By allCourses = By.xpath("//a[contains(@href,'/home/my-courses') and .='Go to the All Courses tab']");
 
-    // 3 dots menu
-    By threeDots = By.xpath("(//button[contains(@id,'dropdown-trigger')])[1]");
+	// 3 dots menu
+	By threeDots = By.xpath("(//button[contains(@id,'dropdown-trigger')])[1]");
 
-    // Create new list button
-    By createNewList = By.xpath("(//div[text()='Create New List'])[1]");
+	// Remove course from wishlist
+	By removeCourse = By.xpath("//button[@data-purpose='remove-from-list']");
 
-    // List name field
-    By listNameField = By.xpath("//input[@placeholder='Name your list e.g. HTML skills']");
+	// Create new list button
+	By createNewList = By.xpath("(//div[text()='Create New List'])[1]");
 
-    // Description field
-    By descriptionField = By.xpath("//textarea");
+	// List name field
+	By listNameField = By.xpath("//input[@placeholder='Name your list e.g. HTML skills']");
 
-    // Done button
-    By doneBtn = By.xpath("//button//span[.='Create']");
+	// Description field
+	By descriptionField = By.xpath("//textarea");
 
-    // Created list validation
-    public By createdList(String listName) {
-        return By.xpath("//h3[contains(.,'" + listName + "')]");
-    }
+	// Done button
+	By doneBtn = By.xpath("//button//span[.='Create']");
 
-    // ================= ACTION METHODS =================
+	// Created list validation
+	public By createdList(String listName) {
+		return By.xpath("//h3[contains(.,'" + listName + "')]");
+	}
 
-    public void clickMyListTab() {
-        AllFunctionality.waitClickable(driver, myListTab, 20).click();
-    }
+	// ================= ACTION METHODS =================
 
-    public boolean isListEmpty() {
-        try {
-            return driver.findElement(emptyListMsg).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	public void clickMyListTab() {
+		AllFunctionality.waitClickable(driver, myListTab, 20).click();
+	}
 
-    public void goToAllCourses() {
-        AllFunctionality.waitClickable(driver, allCourses, 20).click();
-    }
+	public boolean isListEmpty() {
+		try {
+			return driver.findElement(emptyListMsg).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
-    public void clickThreeDots() {
-        AllFunctionality.waitClickable(driver, threeDots, 20).click();
-    }
+	public void goToAllCourses() {
+		AllFunctionality.waitClickable(driver, allCourses, 20).click();
+	}
 
-    public void clickCreateNewList() {
-        AllFunctionality.waitClickable(driver, createNewList, 20).click();
-    }
+	public void clickThreeDots() {
+		AllFunctionality.waitClickable(driver, threeDots, 20).click();
+	}
 
-    public void enterListName(String listName) {
-        WebElement name = AllFunctionality.waitVisible(driver, listNameField, 20);
-        name.clear();
-        name.sendKeys(listName);
-    }
+	public void clickCreateNewList() {
+		AllFunctionality.waitClickable(driver, createNewList, 20).click();
+	}
+	
+	public void clickRemoveList() {
+		AllFunctionality.waitClickable(driver, removeCourse, 20).click();
+	}
 
-    public void enterDescription(String desc) {
-        WebElement description = AllFunctionality.waitVisible(driver, descriptionField, 20);
-        description.clear();
-        description.sendKeys(desc);
-    }
+	public void enterListName(String listName) {
+		WebElement name = AllFunctionality.waitVisible(driver, listNameField, 20);
+		name.clear();
+		name.sendKeys(listName);
+	}
 
-    public void clickDone() {
-        AllFunctionality.waitClickable(driver, doneBtn, 20).click();
-    }
+	public void enterDescription(String desc) {
+		WebElement description = AllFunctionality.waitVisible(driver, descriptionField, 20);
+		description.clear();
+		description.sendKeys(desc);
+	}
 
-    public boolean isListCreated(String listName) {
-        try {
-            return driver.findElement(createdList(listName)).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	public void clickDone() {
+		AllFunctionality.waitClickable(driver, doneBtn, 20).click();
+	}
 
-    // ================= BUSINESS LOGIC =================
+	public boolean isListCreated(String listName) {
+		try {
+			return driver.findElement(createdList(listName)).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
-    public void handleMyListFlow(String listName, String desc) {
+	// ================= BUSINESS LOGIC =================
 
-        clickMyListTab();
+	public void handleMyListFlow(String listName, String desc) {
 
-        if (isListEmpty()) {
+		clickMyListTab();
 
-            System.out.println("No list found → Creating new list");
+		if (isListEmpty()) {
 
-            goToAllCourses();
+			System.out.println("No list found → Creating new list");
 
-            clickThreeDots();
-            clickCreateNewList();
+			goToAllCourses();
 
-            enterListName(listName);
-            enterDescription(desc);
+			clickThreeDots();
+			clickCreateNewList();
 
-            clickDone();
+			enterListName(listName);
+			enterDescription(desc);
 
-            // Go back to My List
-            clickMyListTab();
+			clickDone();
 
-            if (isListCreated(listName)) {
-                System.out.println("List created successfully");
-            } else {
-                System.out.println("List creation failed");
-            }
+			// Go back to My List
+			clickMyListTab();
 
-        } else {
-            System.out.println("List already exists → No action needed");
-        }
-    }
+			if (isListCreated(listName)) {
+				System.out.println("List created successfully");
+			} else {
+				System.out.println("List creation failed");
+			}
+
+		} else {
+			clickThreeDots();
+			clickRemoveList();
+			System.out.println("List already exists → Removed the 1st List");
+		}
+	}
 }

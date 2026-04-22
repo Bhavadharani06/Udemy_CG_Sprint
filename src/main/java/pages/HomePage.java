@@ -47,15 +47,9 @@ public class HomePage {
 	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	        return wait.until(ExpectedConditions.visibilityOf(getProfileImg())).isDisplayed();
 	    } catch (Exception e) {
-	        System.out.println("⚠️ Profile image not found - user not logged in.");
+	        System.out.println("Profile image not found - user not logged in.");
 	        return false;
 	    }
 	}
     
-    @FindBy(xpath = "//a[@data-testid='my-courses']")
-    private WebElement myLearning;
-    
-    public WebElement getMyLearning() {
-        return myLearning;
-    }
 }

@@ -15,17 +15,12 @@ public class HandleCookies {
 	public boolean loadCookies(WebDriver driver, String filePath) {
 		try {
 			File file = new File(filePath);
-
 			if (file.exists() && file.length() > 0) {
-
 				System.out.println("👉 Loading cookies...");
-
 				ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 				Set<Cookie> cookies = (Set<Cookie>) in.readObject();
 				in.close();
-
 				driver.manage().deleteAllCookies();
-
 				for (Cookie cookie : cookies) {
 					try {
 						driver.manage().addCookie(cookie);
@@ -33,33 +28,24 @@ public class HandleCookies {
 						System.out.println("Skipping cookie: " + cookie.getName());
 					}
 				}
-
 				driver.navigate().refresh();
 				System.out.println("✅ Logged in using cookies");
-
-				return true; // ✅ cookies loaded
-
+				return true; 
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return false; // ❌ no cookies
+		return false; 
 	}
 
 	public void saveCookies(WebDriver driver, String filePath) {
 		try {
 			File file = new File(filePath);
-
 			Set<Cookie> cookies = driver.manage().getCookies();
-
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
 			out.writeObject(cookies);
 			out.close();
-
 			System.out.println("✅ Cookies saved!");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
