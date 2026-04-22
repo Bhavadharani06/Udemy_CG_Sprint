@@ -30,7 +30,7 @@ public class InstructorHomePage {
             // 2. Clear any existing text (important for parallel thread stability)
             element.clear();
 
-            // 3. Type the course name passed from Feature file
+            // 3. Type the course name 
             element.sendKeys(courseName);
             System.out.println("✅ Typed into search: " + courseName);
 
