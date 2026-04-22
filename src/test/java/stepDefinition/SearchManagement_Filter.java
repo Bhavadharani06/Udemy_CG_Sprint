@@ -59,14 +59,14 @@ public class SearchManagement_Filter {
 	@And("user applies free course filter")
 	public void apply_free_filter() throws InterruptedException {
 		results.applyFreeFilter();
-		Assert.assertTrue(driver.getCurrentUrl().contains("price=free"), "Free filter was not applied to URL!");
+		Assert.assertTrue(Base.getDriver().getCurrentUrl().contains("price=price-free"), "Free filter was not applied to URL!");
 	}
 
 	@And("user clears all filters")
 	public void clear_filters() throws InterruptedException {
 		results.clearAllFilters();
 		Thread.sleep(2000);
-		Assert.assertFalse(driver.getCurrentUrl().contains("price=free"), "❌ Filters were not cleared successfully!");
+		Assert.assertFalse(Base.getDriver().getCurrentUrl().contains("price-free"), "❌ Filters were not cleared successfully!");
 	}
 
 	@And("user clicks on Add to Cart")
