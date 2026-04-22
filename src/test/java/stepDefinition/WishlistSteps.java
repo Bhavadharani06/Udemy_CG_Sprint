@@ -7,7 +7,7 @@ public class WishlistSteps {
 
     @When("User navigates to Wishlist")
     public void navigate_wishlist() {
-        Pages.wishlistPage.clickWishlistTab();
+        Pages.get().wishlistPage.clickWishlistTab();
     }
 
     @Then("User manages wishlist based on availability")
@@ -15,6 +15,6 @@ public class WishlistSteps {
 
         String courseName = "Java"; // later from Excel
 
-        Pages.wishlistPage.handleWishlistFlow(courseName);
+        Pages.get().wishlistPage.handleWishlistFlow(courseName);
     }
 }

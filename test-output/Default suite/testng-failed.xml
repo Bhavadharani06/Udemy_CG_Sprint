@@ -11,8 +11,12 @@
           <include name="tearDownClass"/>
 =======
           <include name="tearDownClass"/>
+<<<<<<< HEAD
+          <include name="runScenario" invocation-numbers="1 2 4"/>
+=======
           <include name="runScenario" invocation-numbers="1 2 4 5"/>
 >>>>>>> 9cedbe0988234d73c259345ac083d281d0b6a3c2
+>>>>>>> a5612438f903fc2450e69163ce20fe725f63af6c
         </methods>
       </class> <!-- testRunner.RunnerIO -->
     </classes>
