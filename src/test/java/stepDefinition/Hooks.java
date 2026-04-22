@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.Properties;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -16,11 +17,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
 import utility.Base;
-<<<<<<< HEAD
 import utility.HandleCookies;
-=======
+
 import utility.ExtentReportManager;
->>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
 import utility.Pages;
 import utility.ScreenshotUtil;
 
@@ -28,11 +27,7 @@ public class Hooks {
 
     public static Properties prop;
 
-<<<<<<< HEAD
-    // 🔹 Load config
-=======
-    // Load config file
->>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
+
     public void loadConfig() {
         prop = new Properties();
         try {
@@ -45,29 +40,19 @@ public class Hooks {
     }
 
     @Before
-<<<<<<< HEAD
     public void setup(io.cucumber.java.Scenario scenario) {
         loadConfig();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-blink-features=AutomationControlled");
-=======
-    public void setup(Scenario scenario) {
-
-        loadConfig();
-
-        ChromeOptions options = new ChromeOptions();
->>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
         options.addArguments("--start-maximized");
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
-<<<<<<< HEAD
-        Base.driver = new ChromeDriver(options);
-        Base.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Base.setDriver(new ChromeDriver(options));
 
-        Base.driver.get(prop.getProperty("url"));
-        Pages.initPages(Base.driver);
+        Base.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        Base.getDriver().get(prop.getProperty("url"));
+        Pages.initPages(Base.getDriver());
 
         System.out.println("Browser launched");
 
@@ -81,52 +66,26 @@ public class Hooks {
         HandleCookies cookieUtil = new HandleCookies();
         String cookieFile = "cookies1.data";
 
-        boolean loaded = cookieUtil.loadCookies(Base.driver, cookieFile);
+        boolean loaded = cookieUtil.loadCookies(Base.getDriver(), cookieFile);
 
-        if (!loaded || !Pages.homePage.isUserLoggedIn()) {
+        if (!loaded || !Pages.get().homePage.isUserLoggedIn()) {
             System.out.println("👉 Please login manually...");
             try {
                 Thread.sleep(50000); // give time for manual login
             } catch (Exception e) {}
 
-            if (Pages.homePage.isUserLoggedIn()) {
-                cookieUtil.saveCookies(Base.driver, cookieFile);
+            if (Pages.get().homePage.isUserLoggedIn()) {
+                cookieUtil.saveCookies(Base.getDriver(), cookieFile);
             } else {
                 throw new RuntimeException("Login required!");
             }
         } else {
             // Navigate to a protected page after loading cookies
-            Base.driver.get("https://www.udemy.com/home/my-courses");
+            Base.getDriver().get("https://www.udemy.com/home/");
         }
     }
 
-    @After
-    public void tearDown() {
-        if (Base.driver != null) {
-            Base.driver.quit();
-        }
-        System.out.println("Browser closed");
-=======
-        // Optional (only for debugging)
-        options.setExperimentalOption("detach", true);
-
-        WebDriver driver = new ChromeDriver(options);
-
-        // Thread-safe driver
-        Base.setDriver(driver);
-
-        Base.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Base.getDriver().get(prop.getProperty("url"));
-
-        Pages.initPages(Base.getDriver());
-
-        // Extent Report setup
-        ExtentTest test = ExtentReportManager.getInstance().createTest(scenario.getName());
-        ExtentReportManager.setTest(test);
-        test.info("Test Started: " + scenario.getName());
-
-        System.out.println("Browser launched: " + Thread.currentThread().getId());
-    }
+   
 
     @After
     public void tearDown(Scenario scenario) {
@@ -160,6 +119,5 @@ public class Hooks {
     @AfterAll
     public static void afterAll() {
         ExtentReportManager.flushReports();
->>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
     }
 }

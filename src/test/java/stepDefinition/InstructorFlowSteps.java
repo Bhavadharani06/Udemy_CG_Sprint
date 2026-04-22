@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.io.IOException;
 import utility.Pages;
+import utility.ScreenshotUtil;
 import utility.Base;
 import utility.AllFunctionality;
 
@@ -96,7 +97,7 @@ public class InstructorFlowSteps extends Base {
         Assert.assertTrue(isVisible, "❌ No results message missing for invalid search!");
         
         // 3. Take Screenshot for the final project report
-        String path = func.captureScreenshot(Base.getDriver(), "Invalid_Search_Result");
+        String path = ScreenshotUtil.takeScreenshot(Base.getDriver(), "Invalid_Search_Result");
         System.out.println("📸 Screenshot saved at: " + path);
         
         // 4. Finalize Extent Report
