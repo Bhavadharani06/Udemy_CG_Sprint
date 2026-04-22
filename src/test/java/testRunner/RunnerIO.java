@@ -9,9 +9,13 @@ import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListener.class)
 @CucumberOptions(
+<<<<<<< HEAD
+    features = {"./src/test/java/features/archive.feature"},
+=======
 
     features = "src/test/java/features",
 
+>>>>>>> aba8dffd8701e7154fd8751d391edd917fd460b6
     glue = "stepDefinition",
 
     tags = "@parallel",   

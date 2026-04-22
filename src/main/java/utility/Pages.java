@@ -7,6 +7,10 @@ import pages.*;
 
 public class Pages {
 
+
+
+       
+	
     // ✅ Thread-safe instance
     private static final ThreadLocal<Pages> INSTANCE = new ThreadLocal<>();
 
@@ -18,6 +22,12 @@ public class Pages {
     public InstructorSearchResultsPage search;
     public InstructorCoursePage course;
     public InstructorSocialLinkPage social;
+    public  SignUpPage signUpPage;
+	public  MyListPage myListPage;
+	public  WishlistPage wishlistPage;
+	public  ArchivePage archivePage;
+	public  LearningToolsPage learningToolsPage;
+	public  AllCoursesPage allCoursesPage;
 
     // ✅ Private constructor (per thread)
     private Pages(WebDriver driver) {
@@ -28,6 +38,13 @@ public class Pages {
         search = PageFactory.initElements(driver, InstructorSearchResultsPage.class);
         course = PageFactory.initElements(driver, InstructorCoursePage.class);
         social = PageFactory.initElements(driver, InstructorSocialLinkPage.class);
+        signUpPage = PageFactory.initElements(driver, SignUpPage.class);
+        myListPage = PageFactory.initElements(driver, MyListPage.class);
+        wishlistPage = PageFactory.initElements(driver, WishlistPage.class);
+        archivePage = PageFactory.initElements(driver, ArchivePage.class);
+        learningToolsPage = PageFactory.initElements(driver, LearningToolsPage.class);
+        allCoursesPage = PageFactory.initElements(driver, AllCoursesPage.class);
+        
      
         
     }

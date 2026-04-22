@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -82,6 +83,11 @@ public class AllFunctionality {
 	public static WebElement waitVisible(WebDriver driver, WebElement linkedin, int sec) {
 		return new WebDriverWait(driver, Duration.ofSeconds(sec)).until(ExpectedConditions.visibilityOf((WebElement) linkedin));
 	}
+	
+	public static WebElement waitVisible(WebDriver driver, By locator, int sec) {
+		return new WebDriverWait(driver, Duration.ofSeconds(sec)).until(ExpectedConditions.visibilityOf((WebElement) locator));
+	}
+
 
 	public WebElement waitPresence(WebDriver driver, By locator, int sec) {
 		return new WebDriverWait(driver, Duration.ofSeconds(sec))
@@ -169,28 +175,7 @@ public class AllFunctionality {
 		act.perform();
 	}
 
-	// SCREENSHOT
-	// Capture Web page
-	public String captureScreenshot(WebDriver driver, String testName) throws IOException {
-		// Creating a method for time-stamp
-		String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-
-		File dir = new File("./Reports/");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-
-		String path = "./Reports/" + testName + "_" + timestamp + ".png";
-
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File temp = ts.getScreenshotAs(OutputType.FILE);
-		try {
-			FileHandler.copy(temp, new File(path));
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to capture element screenshot", e);
-		}
-		return path;
-	}
+	
 
 	// FILE PROPERTIES
 	// Read property
@@ -300,6 +285,29 @@ public class AllFunctionality {
 			}
 			return data;
 		}
+	}
+	
+
+	public void waitForCaptchaIfPresent(WebDriver driver) {
+
+	    try {
+	        // Wait up to 60 seconds for page to stabilize
+	        new WebDriverWait(driver, Duration.ofSeconds(60))
+	            .until(d -> {
+	                String url = d.getCurrentUrl();
+	                return !url.contains("captcha") && !url.contains("verify");
+	            });
+
+	        System.out.println("✅ No CAPTCHA or handled");
+
+	    } catch (Exception e) {
+	        System.out.println("⚠ CAPTCHA detected → solve manually");
+	        try {
+	            Thread.sleep(40000); // manual solve time
+	        } catch (InterruptedException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 	}
 	
 
