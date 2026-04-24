@@ -1,54 +1,38 @@
-Feature: Udemy Course Purchase and Instructor Social Links Verification
+Feature: Udemy Course and Instructor Flow
 
-Background:
-  Given User launches Chrome browser
+  Background: 
+    Given User launches the browser
+    And User navigates to Udemy website
 
+  Scenario: Search course and verify results
+    When User searches for course from excel
+    Then Search results should be displayed
 
+  Scenario: Open first course and add to cart
+    When User searches for course from excel
+    And User selects the first course from results
+    And User adds the course to cart
+    Then Course should be added successfully
 
-Scenario: Search for a Python course
-  When User enters "python" in search bar
-  And User presses Enter
-  Then Search results should be displayed
+  Scenario: Navigate to instructor profile
+    When User searches for course from excel
+    And User selects the first course from results
+    And User clicks on instructor profile
+    Then Instructor profile page should be displayed
 
+  Scenario: Verify LinkedIn profile opens
+    When User searches for course from excel
+    And User selects the first course from results
+    And User clicks on instructor profile
+    And User opens instructor LinkedIn profile
+    Then LinkedIn page should open in a new tab
 
+  Scenario: Verify YouTube channel opens
+    When User searches for course from excel
+    And User selects the first course from results
+    And User clicks on instructor profile
+    And User opens instructor YouTube channel
+    Then YouTube channel should open successfully
 
-Scenario: Add first course to cart
-  When User enters "python" in search bar
-  And User presses Enter
-  And User clicks on the first course
-  And User clicks on Add to Cart button
-  Then Course should be added to cart
-
-
-
-Scenario: Open instructor profile
-  When User enters "python" in search bar
-  And User presses Enter
-  And User clicks on the first course
-  And User clicks on instructor "Angela Yu"
-  Then Instructor profile page should be displayed
-
-
-Scenario: Open instructor LinkedIn profile
-  When User enters "python" in search bar
-  And User presses Enter
-  And User clicks on the first course
-  And User clicks on instructor "Angela Yu"
-  And User clicks on LinkedIn link
-  Then LinkedIn page should open in new tab
-
-
-Scenario: Open instructor YouTube channel
-  When User enters "python" in search bar
-  And User presses Enter
-  And User clicks on the first course
-  And User clicks on instructor "Angela Yu"
-  And User clicks on YouTube link
-  Then YouTube channel should open successfully
-
-
-
-Scenario: Search with invalid keyword
-  When User enters "asdfghjkl12345" in search bar
-  And User presses Enter
-  Then No courses should be displayed
+  Scenario: Verify behavior for invalid course search
+    Then An appropriate no results message should be displayed

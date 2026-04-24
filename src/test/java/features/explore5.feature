@@ -1,7 +1,7 @@
 Feature: Add course to cart and checkout
 
   Scenario: User adds course to cart and proceeds to checkout using email from Excel
-    Given User opens Udemy website
+    #Given User opens Udemy website
     When User clicks on Explore and selects "<Category>"
     And User hovers on first course and clicks Add to Cart
     And User clicks on Go to Cart
