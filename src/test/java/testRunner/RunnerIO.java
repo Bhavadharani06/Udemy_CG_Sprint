@@ -8,31 +8,21 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListener.class)
-@CucumberOptions(
-		features="src/test/java/features", 
-		
+@CucumberOptions(features = "src/test/java/features/",
 
-    glue = "stepDefinition",
+		glue = "stepDefinition",
 
-  
-    tags = "@invalidurl",   
+		tags = "@invalidurl",
 
-    plugin = {
-        "pretty",
-        "html:target/cucumber-report.html",
-        "json:target/cucumber.json",
-        "junit:target/cucumber.xml"
-    },
+		plugin = { "pretty", "html:target/cucumber-report.html", "json:target/cucumber.json",
+				"junit:target/cucumber.xml" },
 
-    monochrome = true,
-    dryRun = false
-)
+		monochrome = true, dryRun = false)
 public class RunnerIO extends AbstractTestNGCucumberTests {
 
-    
-    @Override
-    @DataProvider(parallel = true)
-    public Object[][] scenarios() {
-        return super.scenarios();
-    }
+	@Override
+	@DataProvider(parallel = false)
+	public Object[][] scenarios() {
+		return super.scenarios();
+	}
 }
