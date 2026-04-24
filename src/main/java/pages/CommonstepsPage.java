@@ -49,7 +49,37 @@ public class CommonstepsPage {
 	        cat.click();
 	        Thread.sleep(10000);
 	    }
-	      
+	    
+//	    public void selectCategory(String category) {
+//
+//	        // Scroll to top
+//	        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0,0);");
+//
+//	        // Wait for Explore button
+//	        WebElement explore = wait.until(
+//	            ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[aria-label='Explore']"))
+//	        );
+//
+//	        // Hover on Explore
+//	        Actions actions = new Actions(driver);
+//	        actions.moveToElement(explore).perform();
+//
+//	        // Wait for dropdown menu
+//	        wait.until(ExpectedConditions.visibilityOfElementLocated(
+//	            By.xpath("//div[contains(@class,'ud-mega-menu')]")
+//	        ));
+//
+//	        // ✅ FIXED locator (SPAN not DIV)
+//	        By categoryLocator = By.xpath("//span[normalize-space()='" + category + "']");
+//
+//	        WebElement cat = wait.until(
+//	            ExpectedConditions.visibilityOfElementLocated(categoryLocator)
+//	        );
+//
+//	        // Click using JS
+//	        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cat);
+//	    }
+//	    
 
 	    public void selectSubCategory(String subCategory) {
 

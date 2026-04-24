@@ -11,6 +11,7 @@ import org.testng.annotations.Listeners;
 @CucumberOptions(
 <<<<<<< HEAD
 
+<<<<<<< HEAD
     features = "./src/test/java/features",
 
     glue = "stepDefinition",
@@ -24,6 +25,14 @@ import org.testng.annotations.Listeners;
 
     tags = "@Instructor_parallel",   
 >>>>>>> 0b7c4a2 (course-management:Updated Stepdefinition)
+=======
+
+    features = "src\\test\\java\\features\\Explore.feature",
+
+    glue = "stepDefinition",
+
+    tags = "@udemy_all",   
+>>>>>>> 8b6bb6c (explore:modified files are added)
 
     plugin = {
         "pretty",
@@ -40,7 +49,7 @@ public class RunnerIO extends AbstractTestNGCucumberTests {
 
     
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }
