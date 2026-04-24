@@ -107,11 +107,11 @@ public class Hooks {
             test.pass("Scenario PASSED: " + scenario.getName());
         }
 
-        if (Base.getDriver() != null) {
-            Base.getDriver().quit();
-            Base.unload();
-            Pages.remove();
-        }
+//        if (Base.getDriver() != null) {
+//           // Base.getDriver().quit();
+//            Base.unload();
+//            //Pages.remove();
+//        }
 
         System.out.println("Browser closed: " + Thread.currentThread().getId());
     }
