@@ -9,30 +9,14 @@ import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListener.class)
 @CucumberOptions(
-<<<<<<< HEAD
 
-<<<<<<< HEAD
     features = "./src/test/java/features",
 
     glue = "stepDefinition",
 
     tags = "@invalidurl",   
-=======
-		features="src/test/java/features", 
-		
 
-    glue = "stepDefinition",
-
-    tags = "@Instructor_parallel",   
->>>>>>> 0b7c4a2 (course-management:Updated Stepdefinition)
-=======
-
-    features = "src\\test\\java\\features\\Explore.feature",
-
-    glue = "stepDefinition",
-
-    tags = "@udemy_all",   
->>>>>>> 8b6bb6c (explore:modified files are added)
+   
 
     plugin = {
         "pretty",
