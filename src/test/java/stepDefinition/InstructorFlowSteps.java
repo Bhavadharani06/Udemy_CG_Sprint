@@ -1,6 +1,8 @@
 package stepDefinition;
 
 import io.cucumber.java.en.*;
+import pages.SearchPage;
+
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,24 +23,25 @@ public class InstructorFlowSteps extends Base {
     public void user_launches_the_browser() {
         // Initialize the report
      
-        // ✅ Use getDriver() to verify the specific thread's browser
+        // Use getDriver() to verify the specific thread's browser
         Assert.assertNotNull(Base.getDriver(), "❌ Driver initialization failed.");
     }
 
     @Given("User navigates to Udemy website")
     public void user_navigates_to_udemy_website() {
-        // ✅ Pass getDriver() into the utility method
+        // Pass getDriver() into the utility method
         func.openURL(Base.getDriver(), "https://www.udemy.com/");
     }
 
     @When("User searches for {string}")
-    public void user_searches_for(String courseName) throws InterruptedException {
-        // ✅ Use Pages.get() to ensure page objects are thread-local
-        Pages.get().home.searchCourse(courseName);
-        System.out.println("🔍 Thread ID [" + Thread.currentThread().getId() + "] searching: " + courseName);
-        
-        // Manual Captcha Bypass
-        Thread.sleep(30000); 
+    public void user_searches_for(String keyword) {
+
+        SearchSteps.searchKeyword = keyword;   // ✅ FIXED
+
+        SearchPage searchPage = new SearchPage(Base.getDriver());
+        searchPage.searchCourse(keyword);
+
+        System.out.println("Searching: " + keyword);
     }
 
     @Then("Search results should be displayed")

@@ -70,5 +70,20 @@ public class SearchPage {
             }
         }
     }
+    public void searchCourse(String keyword) {
+
+        try {
+            WebElement searchBox = driver.findElement(By.name("q")); // Udemy search bar
+
+            searchBox.clear();
+            searchBox.sendKeys(keyword);
+            searchBox.sendKeys(Keys.ENTER);
+
+            System.out.println("🔍 Searched for: " + keyword);
+
+        } catch (Exception e) {
+            System.out.println("Search failed: " + e.getMessage());
+        }
+    }
     
 }
