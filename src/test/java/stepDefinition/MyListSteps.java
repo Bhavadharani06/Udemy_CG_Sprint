@@ -1,49 +1,36 @@
 package stepDefinition;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import io.cucumber.java.en.Then;
-import utility.Base;
+import io.cucumber.java.en.*;
 import utility.Pages;
 
 public class MyListSteps {
 
-	@Given("User is on My Learning page and My List")
-	public void user_is_on_my_learning_page_and_my_list() {
-//	    Base.driver.get("https://www.udemy.com/home/my-courses/");
+    // BACKGROUND
 
-		Pages.get().signUpPage.clickSignUp();
+    @Given("User navigates to My Learning Page")
+    public void user_navigates_to_my_learning_page() {
+        Pages.get().homePage.navigateToMyLearning();
+        System.out.println("Navigated to My Learning page");
+    }
 
-		Pages.get().signUpPage.waitForCaptcha();
-		Pages.get().signUpPage.enterName("Bhavadharani V");
-		Pages.get().signUpPage.enterEmail("bhavadharanivs06@gmail.com");
-		Pages.get().signUpPage.clickContinue();
-		Pages.get().signUpPage.waitForOTP();
-		Pages.get().signUpPage.clickFinalSignUp();
-		System.out.println("SignUp Successfully");
-		System.out.println("Clicking on My Learning...");
+    // NAVIGATE TO MY LISTS
 
-	}
+    @When("User navigates to My Lists tab")
+    public void user_navigates_to_my_lists_tab() {
+        Pages.get().myListPage.clickMyListTab();
+    }
 
-	@When("User navigates to My Lists tab")
-	public void user_navigates_to_my_lists_tab() {
-		Pages.get().myListPage.clickMyListTab();
-	}
+    // MAIN FLOW 
 
-	@Then("User handles My List flow with listName {string} and description {string}")
-	public void user_handles_my_list_flow(String listName, String desc) {
-		Pages.get().myListPage.handleMyListFlow(listName, desc);
-	}
+    @Then("User handles My List flow with listName {string} and description {string}")
+    public void user_handles_my_list_flow(String listName, String desc) throws InterruptedException {
+        Pages.get().myListPage.handleMyListFlow(listName, desc);
+    }
 
-	@Then("User verifies list is already present")
-	public void user_verifies_list_is_already_present() {
+    // ASSERTION
 
-		boolean isEmpty = Pages.get().myListPage.isListEmpty();
-
-		if (!isEmpty) {
-			System.out.println("✅ List already exists");
-		} else {
-			throw new AssertionError("❌ No list found");
-		}
-	}
+    @And("User verifies the list is present in My Lists")
+    public void user_verifies_list_present() {
+        Pages.get().myListPage.assertListPresent();
+    }
 }

@@ -6,7 +6,15 @@
       <class name="testRunner.RunnerIO">
         <methods>
           <include name="setUpClass"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <include name="runScenario" invocation-numbers="3"/>
+=======
           <include name="runScenario" invocation-numbers="4"/>
+>>>>>>> 8b6bb6c (explore:modified files are added)
+=======
+          <include name="runScenario" invocation-numbers="4"/>
+>>>>>>> 89b8e28d1af27e40b0226abfcfa9662d8fd95640
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- testRunner.RunnerIO -->
