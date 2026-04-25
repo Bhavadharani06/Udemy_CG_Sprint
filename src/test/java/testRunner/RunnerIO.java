@@ -10,13 +10,12 @@ import org.testng.annotations.Listeners;
 @Listeners(TestNGListener.class)
 @CucumberOptions(
 
-    features = "./src/test/java/features",
+
+    features = "src/test/java/features",
 
     glue = "stepDefinition",
 
     tags = "@invalidurl",   
-
-   
 
     plugin = {
         "pretty",
@@ -27,13 +26,12 @@ import org.testng.annotations.Listeners;
 
     monochrome = true,
     dryRun = false
-
 )
 public class RunnerIO extends AbstractTestNGCucumberTests {
 
     
     @Override
-    @DataProvider(parallel = false)
+    @DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }

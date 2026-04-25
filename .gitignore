@@ -2,4 +2,8 @@ target/
 test-output/
 *.class
 *.log
+<<<<<<< HEAD
 cookies1.data
+=======
+cookies.data
+>>>>>>> 89b8e28d1af27e40b0226abfcfa9662d8fd95640
