@@ -1,141 +1,225 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utility.AllFunctionality;
-import utility.Base;
+
+import java.time.Duration;
 
 public class MyListPage {
 
-	WebDriver driver;
+    WebDriver driver;
+    WebDriverWait wait;
+    JavascriptExecutor js;
 
-	public MyListPage(WebDriver driver) {
-		this.driver = driver;
-	}
+    public MyListPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.js = (JavascriptExecutor) driver;
+    }
 
-	// ================= LOCATORS =================
+    // LOCATORS
 
-	// My List tab
-	By myListTab = By.xpath("//a[contains(@href,'lists')]");
+    // My List tab
+    private By myListTab = By.xpath("//a[contains(@href,'lists')]");
 
-	// Empty list message
-	By emptyListMsg = By.xpath("//h3[contains(text(),'Organize and access')]");
+    // Empty list message — Image 2: "Organize and access your courses faster!"
+    private By emptyListMsg = By.xpath("//h3[contains(text(),'Organize and access')]");
 
-	// All Courses link
-	By allCourses = By.xpath("//a[contains(@href,'/home/my-courses') and .='Go to the All Courses tab']");
+    // "Go to the All Courses tab" link — Image 2
+    private By goToAllCoursesLink = By.xpath("//a[contains(@href,'/home/my-courses') and contains(.,'Go to the All Courses tab')]");
 
-	// 3 dots menu
-	By threeDots = By.xpath("(//button[contains(@id,'dropdown-trigger')])[1]");
+    // All Courses tab in nav
+    private By allCoursesTab = By.xpath("//a[contains(@href,'learning') and contains(.,'All courses')]");
 
-	// Remove course from wishlist
-	By removeCourse = By.xpath("//button[@data-purpose='remove-from-list']");
+    // 3 dots button — Image 1 & 3: (//button[contains(@id,'dropdown-trigger')])
+    // [1] = first course, [2] = second course
+    private By firstThreeDots  = By.xpath("(//button[contains(@id,'dropdown-trigger')])[1]");
+    private By secondThreeDots = By.xpath("(//button[contains(@id,'dropdown-trigger')])[2]");
 
-	// Create new list button
-	By createNewList = By.xpath("(//div[text()='Create New List'])[1]");
+    // Create New List option in dropdown — Image 3: div text = "Create New List"
+    private By createNewListBtn = By.xpath("//div[contains(@class,'ud-block-list-item-content') and text()='Create New List']");
 
-	// List name field
-	By listNameField = By.xpath("//input[@placeholder='Name your list e.g. HTML skills']");
+    // Create new list modal fields — Image 4
+    private By listNameField    = By.xpath("//input[@placeholder='Name your list e.g. HTML skills']");
+    private By descriptionField = By.xpath("//textarea[@placeholder='Why are you creating this list? e.g. To start a new business, To get a new job, To become a web developer']");
+    private By createBtn        = By.xpath("//button[.//span[text()='Create']]");
 
-	// Description field
-	By descriptionField = By.xpath("//textarea");
+    // Verify created list by name in My Lists page
+    public By createdListLocator(String listName) {
+        return By.xpath("//h3[contains(.,'" + listName + "')]");
+    }
 
-	// Done button
-	By doneBtn = By.xpath("//button//span[.='Create']");
+    // NAVIGATION
 
-	// Created list validation
-	public By createdList(String listName) {
-		return By.xpath("//h3[contains(.,'" + listName + "')]");
-	}
+    public void clickMyListTab() {
+        AllFunctionality.waitClickable(driver, myListTab, 20).click();
+        System.out.println("Clicked My Lists tab");
+    }
 
-	// ================= ACTION METHODS =================
+    public void clickAllCoursesTab() {
+        AllFunctionality.waitClickable(driver, allCoursesTab, 20).click();
+        System.out.println("Clicked All Courses tab");
+    }
 
-	public void clickMyListTab() {
-		AllFunctionality.waitClickable(driver, myListTab, 20).click();
-	}
+    public void clickGoToAllCoursesLink() {
+        AllFunctionality.waitClickable(driver, goToAllCoursesLink, 20).click();
+        System.out.println("Clicked 'Go to the All Courses tab' link");
+    }
 
-	public boolean isListEmpty() {
-		try {
-			return driver.findElement(emptyListMsg).isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    // VALIDATION
 
-	public void goToAllCourses() {
-		AllFunctionality.waitClickable(driver, allCourses, 20).click();
-	}
+    public boolean isListEmpty() {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(emptyListMsg));
+            System.out.println("My Lists is EMPTY");
+            return true;
+        } catch (Exception e) {
+            System.out.println("My Lists has existing lists");
+            return false;
+        }
+    }
 
-	public void clickThreeDots() {
-		AllFunctionality.waitClickable(driver, threeDots, 20).click();
-	}
+    public boolean isListCreated(String listName) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(
+                createdListLocator(listName))).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	public void clickCreateNewList() {
-		AllFunctionality.waitClickable(driver, createNewList, 20).click();
-	}
-	
-	public void clickRemoveList() {
-		AllFunctionality.waitClickable(driver, removeCourse, 20).click();
-	}
+    // THREE DOTS ACTIONS
 
-	public void enterListName(String listName) {
-		WebElement name = AllFunctionality.waitVisible(driver, listNameField, 20);
-		name.clear();
-		name.sendKeys(listName);
-	}
+    // Click 3 dots of first course (used when My List is empty → go to All Courses → first course)
+    public void clickFirstCourseDots() throws InterruptedException {
+        WebElement dots = wait.until(ExpectedConditions.elementToBeClickable(firstThreeDots));
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dots);
+        Thread.sleep(500);
+        dots.click();
+        System.out.println("Clicked 3 dots on first course");
+    }
 
-	public void enterDescription(String desc) {
-		WebElement description = AllFunctionality.waitVisible(driver, descriptionField, 20);
-		description.clear();
-		description.sendKeys(desc);
-	}
+    // Click 3 dots of second course (used when My List has courses → All Courses → second course)
+    public void clickSecondCourseDots() throws InterruptedException {
+        WebElement dots = wait.until(ExpectedConditions.elementToBeClickable(secondThreeDots));
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dots);
+        Thread.sleep(500);
+        dots.click();
+        System.out.println("Clicked 3 dots on second course");
+    }
 
-	public void clickDone() {
-		AllFunctionality.waitClickable(driver, doneBtn, 20).click();
-	}
+    // CREATE LIST MODAL
 
-	public boolean isListCreated(String listName) {
-		try {
-			return driver.findElement(createdList(listName)).isDisplayed();
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    public void clickCreateNewList() {
+        AllFunctionality.waitClickable(driver, createNewListBtn, 20).click();
+        System.out.println("Clicked Create New List");
+    }
 
-	// ================= BUSINESS LOGIC =================
+    public void enterListName(String listName) {
+        WebElement field = AllFunctionality.waitClickable(driver, listNameField, 20);
+        field.clear();
+        field.sendKeys(listName);
+        System.out.println("Entered list name: " + listName);
+    }
 
-	public void handleMyListFlow(String listName, String desc) {
+    public void enterDescription(String desc) {
+        WebElement field = AllFunctionality.waitClickable(driver, descriptionField, 20);
+        field.clear();
+        field.sendKeys(desc);
+        System.out.println("Entered description: " + desc);
+    }
 
-		clickMyListTab();
+    public void clickCreate() {
+        AllFunctionality.waitClickable(driver, createBtn, 20).click();
+        System.out.println("Clicked Create button");
+    }
 
-		if (isListEmpty()) {
+    // ASSERTION
 
-			System.out.println("No list found → Creating new list");
+    public void assertListCreated(String listName) {
+        if (isListCreated(listName))
+            System.out.println("PASS: List created and visible — " + listName);
+        else
+            System.out.println("FAIL: List NOT found — " + listName);
+    }
 
-			goToAllCourses();
+    public void assertListPresent() {
+        if (!isListEmpty())
+            System.out.println("PASS: My Lists already has lists");
+        else
+            System.out.println("FAIL: My Lists is empty");
+    }
 
-			clickThreeDots();
-			clickCreateNewList();
+    // MAIN FLOW
 
-			enterListName(listName);
-			enterDescription(desc);
+    public void handleMyListFlow(String listName, String desc) throws InterruptedException {
 
-			clickDone();
+        if (isListEmpty()) {
 
-			// Go back to My List
-			clickMyListTab();
+            // ── EMPTY: "Go to the All Courses tab" link visible ──
+            System.out.println("My Lists empty → going to All Courses via link");
 
-			if (isListCreated(listName)) {
-				System.out.println("List created successfully");
-			} else {
-				System.out.println("List creation failed");
-			}
+            // Click "Go to the All Courses tab" link
+            clickGoToAllCoursesLink();
+            Thread.sleep(2000);
 
-		} else {
-			clickThreeDots();
-			clickRemoveList();
-			System.out.println("List already exists → Removed the 1st List");
-		}
-	}
+            // Click 3 dots of FIRST course
+            clickFirstCourseDots();
+            Thread.sleep(1000);
+
+            // Click Create New List
+            clickCreateNewList();
+            Thread.sleep(1000);
+
+            // Fill modal
+            enterListName(listName);
+            enterDescription(desc);
+            clickCreate();
+            Thread.sleep(2000);
+
+            // Navigate back to My Lists
+            clickMyListTab();
+            Thread.sleep(1500);
+
+            // Verify
+            assertListCreated(listName);
+
+        } else {
+
+            // ── HAS COURSES: navigate to All Courses tab manually ──
+            System.out.println("My Lists has courses → going to All Courses tab");
+
+            // Click All Courses tab
+            clickAllCoursesTab();
+            Thread.sleep(2000);
+
+            // Click 3 dots of SECOND course
+            clickSecondCourseDots();
+            Thread.sleep(1000);
+
+            // Click Create New List
+            clickCreateNewList();
+            Thread.sleep(1000);
+
+            // Fill modal
+            enterListName(listName);
+            enterDescription(desc);
+            clickCreate();
+            Thread.sleep(2000);
+
+            // Navigate back to My Lists
+            clickMyListTab();
+            Thread.sleep(1500);
+
+            // Verify
+            assertListCreated(listName);
+        }
+    }
 }

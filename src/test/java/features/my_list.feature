@@ -1,12 +1,10 @@
+@my_learnings
 Feature: My Lists Management
 
-Background:
-  Given User is on My Learning page and My List
+  Background:
+    Given User navigates to My Learning Page
 
-Scenario: Create list when My Lists is empty
-  When User navigates to My Lists tab
-  Then User handles My List flow with listName "Java List" and description "My learning list for Java Course"
-
-Scenario: Verify existing list in My Lists
-  When User navigates to My Lists tab
-  Then User verifies list is already present
+  Scenario: Handle My Lists and verify list creation
+    When User navigates to My Lists tab
+    Then User handles My List flow with listName "Java List" and description "My learning list for Java Course"
+    And User verifies the list is present in My Lists
