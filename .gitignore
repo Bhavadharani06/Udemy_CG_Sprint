@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 target/
 test-output/
 *.class
-cookies.data
 *.log
+cookies1.data

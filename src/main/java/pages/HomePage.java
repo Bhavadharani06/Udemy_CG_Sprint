@@ -71,4 +71,12 @@ public class HomePage {
 	    }
 	}
     
+    @FindBy(xpath = "//a[@data-testid='my-courses']")
+    private WebElement myLearning;
+
+    public void navigateToMyLearning() {
+        myLearning.click();
+        System.out.println("Navigated to My Learning page");
+    }
+    
 }

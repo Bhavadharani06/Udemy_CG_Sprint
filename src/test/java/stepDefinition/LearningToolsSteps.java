@@ -1,36 +1,54 @@
 package stepDefinition;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
+import utility.Base;
 import utility.Pages;
 
 public class LearningToolsSteps {
-	@Given("User is on My Learning Page and Learning Tools")
-	public void user_is_on_my_learning_page_and_learning_tools() {
-//		Base.driver.get("https://www.udemy.com/home/my-courses/");
 
-		Pages.get().signUpPage.clickSignUp();
+    @Given("User is on My Learning Page and Learning Tools")
+    public void user_is_on_my_learning_page_and_learning_tools()
+            throws InterruptedException {
+        Base.getDriver().get("https://www.udemy.com/home/my-courses/");
+        Thread.sleep(2000);
+        System.out.println("Navigated to My Learning page");
+    }
 
-		Pages.get().signUpPage.waitForCaptcha();
-		Pages.get().signUpPage.enterName("Bhavadharani V");
-		Pages.get().signUpPage.enterEmail("bhavadharani2608@gmail.com");
-		Pages.get().signUpPage.clickContinue();
-		Pages.get().signUpPage.waitForOTP();
-		Pages.get().signUpPage.clickFinalSignUp();
-		System.out.println("SignUp Successfully");
-		System.out.println("Clicking on My Learning...");
-	}
+    @When("User navigates to Learning Tools")
+    public void user_navigates_to_learning_tools() throws InterruptedException {
+        Pages.get().learningToolsPage.navigateToLearningTools();
+        Pages.get().learningToolsPage.clickAddNewReminder();
+    }
 
-	@When("User navigates to Learning Tools")
-	public void user_navigates_to_learning_tools() {
-		Pages.get().learningToolsPage.clickLearningToolsTab();
-	}
+    @Then("User creates a learning reminder for courseName {string} freq {string} time {string} and date {string}")
+    public void user_creates_a_learning_reminder(
+            String courseName, String freq, String time, String date)
+            throws InterruptedException {
 
-	@Then("User creates a learning reminder for courseName {string} freq {string} time {string} and date {string}")
-	public void user_creates_a_learning_reminder_for_course_name_freq_time_and_date(String courseName, String freq,
-			String time, String date) {
-		Pages.get().learningToolsPage.createReminderFlow(courseName, time, date, freq);
-	}
+        Pages.get().learningToolsPage.selectCourse(courseName);
+        Pages.get().learningToolsPage.clickNext();
 
+        Pages.get().learningToolsPage.selectFrequency(freq);
+        Pages.get().learningToolsPage.enterTime(time);
+
+        if (freq.equalsIgnoreCase("Weekly")) {
+            Pages.get().learningToolsPage.selectDay("Mo");
+            Pages.get().learningToolsPage.selectDay("We");
+            Pages.get().learningToolsPage.selectDay("Fr");
+        }
+
+        if (freq.equalsIgnoreCase("Once") && date != null && !date.isEmpty()) {
+            Pages.get().learningToolsPage.enterDate(date);
+        }
+
+        Pages.get().learningToolsPage.clickNext();
+        Pages.get().learningToolsPage.clickDone();
+
+        Pages.get().learningToolsPage.assertModalClosed();
+    }
+
+    @Then("the reminder should be visible on the Learning Tools page for {string}")
+    public void assertReminderVisible(String courseName) {
+        Pages.get().learningToolsPage.verifyReminderCreated(courseName);
+    }
 }

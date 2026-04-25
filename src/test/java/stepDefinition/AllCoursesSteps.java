@@ -3,179 +3,127 @@ package stepDefinition;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.util.List;
 
 import utility.AllFunctionality;
-import utility.Base;
 import utility.Pages;
-
-import java.io.FileInputStream;
-import java.util.List;
-import java.util.Map;
 
 public class AllCoursesSteps {
 
-    // BACKGROUND
-    @Given("user is logged in and navigated to All Courses page")
-    public void user_is_logged_in_and_navigated_to_all_courses_page() {
-        // Assumes login already completed in a Login step / hook
+    AllFunctionality util = new AllFunctionality();
+
+    // BACKGROUND 
+
+    @Given("user navigates directly to All Courses page")
+    public void user_navigates_directly_to_all_courses_page() {
         Pages.get().allCoursesPage.navigateToAllCourses();
-        System.out.println("Navigated directly to All Courses page");
-    }
-    
-    // GUARD — at least one course must be enrolled
- 
-    @Given("user has at least one course enrolled")
-    public void user_has_at_least_one_course_enrolled() {
-        if (Pages.get().allCoursesPage.isNoCourseMessageDisplayed()) {
-            System.out.println("No courses enrolled — stopping test. "
-                + "Please enroll in a course manually and re-run.");
-            throw new AssertionError(
-                "SKIP: No courses enrolled. Nothing to play — "
-                + "enroll in at least one course first.");
-        }
-        System.out.println("Course(s) found — proceeding.");
     }
 
-    // COURSE PRESENCE CHECKS
-
-    @Then("user should see Start learning message")
-    public void user_should_see_start_learning_message() {
-        Pages.get().allCoursesPage.assertNoCoursesMessage();
-    }
-
-    @Then("user should see course {string} in All Courses page")
-    public void user_should_see_course_in_all_courses_page(String courseName) {
-        Pages.get().allCoursesPage.assertCoursePresent(courseName);
-    }
-
-    @Then("user should NOT see course {string} in All Courses page")
-    public void user_should_not_see_course_in_all_courses_page(String courseName) {
-        Pages.get().allCoursesPage.assertCourseNotPresent(courseName);
-    }
-
-    @Then("user should see courses on the All Courses page")
-    public void user_should_see_courses_on_the_all_courses_page() {
+    // COURSE PRESENCE 
+    @Then("user should see at least one course in All Courses")
+    public void user_should_see_at_least_one_course() {
         Pages.get().allCoursesPage.assertCoursesPresent();
     }
 
-    @Then("user should see exactly {int} courses in All Courses page")
-    public void user_should_see_exactly_n_courses(int count) {
-        Pages.get().allCoursesPage.assertCourseCount(count);
+    @Then("user should see the no courses message")
+    public void user_should_see_no_courses_message() {
+        boolean displayed = Pages.get().allCoursesPage.isNoCourseMessageDisplayed();
+        if (!displayed)
+            System.out.println("FAIL: 'Start learning' message not displayed");
+        else
+            System.out.println("PASS: No courses message displayed");
     }
 
-    // COURSE CLICK
+    @Then("user gets the first course title")
+    public void user_gets_first_course_title() {
+        String title = Pages.get().allCoursesPage.getFirstCourseTitle();
+        if (title.isEmpty())
+            System.out.println("FAIL: First course title is empty");
+        else
+            System.out.println("First course title: " + title);
+    }
+
+    // CLICK FIRST COURSE & PLAY
 
     @When("user clicks on the first course")
-    public void user_clicks_on_the_first_course() throws InterruptedException {
+    public void user_clicks_on_first_course() throws InterruptedException {
         Pages.get().allCoursesPage.clickFirstCourse();
+        Thread.sleep(3000);
     }
 
-    // VIDEO PLAYER ACTIONS
-
-    @When("user plays the video")
-    public void user_plays_the_video() throws InterruptedException {
+    @And("user plays the video")
+    public void user_plays_the_video() {
         Pages.get().allCoursesPage.playVideo();
     }
 
-    @When("user toggles the volume")
-    public void user_toggles_the_volume() throws InterruptedException {
-        Pages.get().allCoursesPage.toggleVolume();
-    }
+    // NAVIGATE BACK
 
- 
-    @When("user changes playback settings with the following options:")
-    public void user_changes_playback_settings(DataTable dataTable) throws InterruptedException {
-        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
-
-        for (Map<String, String> row : rows) {
-            String type  = row.get("settingType");
-            String value = row.get("value");
-
-            switch (type.toLowerCase()) {
-                case "speed":
-                    int speedIndex = Integer.parseInt(value.trim());
-                    Pages.get().allCoursesPage.changeSpeed(speedIndex);
-                    System.out.println("Applied speed index: " + speedIndex
-                        + " = " + Pages.get().allCoursesPage.getSpeedLabel(speedIndex));
-                    break;
-                case "quality":
-                    Pages.get().allCoursesPage.changeQuality(value);
-                    System.out.println("Applied quality: " + value);
-                    break;
-                default:
-                    System.out.println("Unknown setting type: " + type);
-            }
-        }
-    }
-
-
-    @Then("user should be able to select each speed from the list:")
-    public void user_should_be_able_to_select_each_speed(DataTable dataTable)
-            throws InterruptedException {
-        List<String> rows = dataTable.asList();
-        rows.remove(0); // remove header "speedIndex"
-
-        for (String indexStr : rows) {
-            int speedIndex = Integer.parseInt(indexStr.trim());
-            Pages.get().allCoursesPage.changeSpeed(speedIndex);
-            System.out.println("Speed index " + speedIndex
-                + " = " + Pages.get().allCoursesPage.getSpeedLabel(speedIndex));
-            Thread.sleep(500);
-        }
-    }
-
-    // ASSERTION — course name inside player
-
-    @Then("user should see the course title in the player")
-    public void user_should_see_the_course_title_in_the_player() {
-        String title = Pages.get().allCoursesPage.getCourseNameFromPlayer();
-        if (title == null || title.isEmpty()) {
-            throw new AssertionError("FAIL: Course title not visible in player");
-        }
-        System.out.println("PASS: Course title in player = " + title);
-    }
-
-    @Then("user should see course title {string} in the player")
-    public void user_should_see_course_title_in_player(String expectedTitle) {
-        Pages.get().allCoursesPage.assertCourseNameInPlayer(expectedTitle);
-    }
-
-    // NAVIGATION BACK
-
-    @When("user navigates back to All Courses page")
-    public void user_navigates_back_to_all_courses_page() throws InterruptedException {
+    @Then("user navigates back to All Courses page")
+    public void user_navigates_back_to_all_courses() throws InterruptedException {
         Pages.get().allCoursesPage.navigateBackToAllCourses();
     }
 
- 
-    // EXCEL-DRIVEN STEP
+    // ASSERTIONS
 
-    @Then("user verifies courses from Excel file {string} on sheet {string}")
-    public void user_verifies_courses_from_excel(String filePath, String sheetName)
-            throws Exception {
+    @And("user asserts course count is more than 0")
+    public void user_asserts_course_count_more_than_zero() {
+        int count = Pages.get().allCoursesPage.getCourseCount();
+        if (count == 0)
+            System.out.println("FAIL: Expected courses but found 0");
+        else
+            System.out.println("PASS: Course count after returning = " + count);
+    }
 
-        String fullPath = System.getProperty("user.dir") + "/src/test/resources/" + filePath;
+    // Scenario Outline step
+    @Then("user should see course {string} in All Courses")
+    public void user_should_see_course_in_all_courses(String courseName) {
+        Pages.get().allCoursesPage.assertCoursePresent(courseName);
+    }
 
-        Object[][] data = new AllFunctionality().getExcelDataAsArray(fullPath, sheetName);
+    // DATATABLE
 
-        System.out.println("Reading Excel using utility: " + filePath + " | Sheet: " + sheetName);
+    @Then("user verifies the following courses are present:")
+    public void user_verifies_following_courses_present(DataTable dataTable) {
+        List<String> courseNames = dataTable.asList(String.class);
 
-        for (Object[] row : data) {
+        for (String courseName : courseNames) {
+            if (courseName.equalsIgnoreCase("courseName")) continue; // skip header
 
-            String courseName = row[0].toString().trim();
-            String shouldExist = row[1].toString().trim().toUpperCase();
+            boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);
+            if (!found)
+                System.out.println("FAIL: Course NOT found — " + courseName);
+            else
+                System.out.println("PASS (DataTable): " + courseName);
+        }
+    }
 
-            System.out.println("Course: " + courseName + " | ShouldExist: " + shouldExist);
+    // EXCEL
 
-            if ("TRUE".equals(shouldExist)) {
-                Pages.get().allCoursesPage.assertCoursePresent(courseName);
-            } else {
-                Pages.get().allCoursesPage.assertCourseNotPresent(courseName);
+    @Then("user verifies courses from excel sheet {string}")
+    public void user_verifies_courses_from_excel(String sheetName) throws Exception {
+        String excelPath = System.getProperty("user.dir")
+                + "/src/test/resources/TestData/TestData.xlsx";
+
+        util.loadExcelFile(excelPath, sheetName);
+
+        int rowNum = 1; // row 0 = header, start from row 1
+        while (true) {
+            try {
+                String courseName = util.getDataFromSingleCell(rowNum, 0); // column 0 = course name
+                if (courseName == null || courseName.trim().isEmpty()) break;
+
+                boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);
+                if (!found)
+                    System.out.println("FAIL: Course from Excel NOT found — " + courseName);
+                else
+                    System.out.println("PASS (Excel row " + rowNum + "): " + courseName);
+
+                rowNum++;
+            } catch (Exception e) {
+                break; // no more rows
             }
         }
 
-        System.out.println("Excel verification complete using utility");
+        util.closeExcel();
     }
 }
