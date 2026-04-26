@@ -200,8 +200,8 @@ Udemy_CG_Sprint/
 
 | Sheet | Columns | Used In |
 |---|---|---|
-| CourseData | TC_ID, Course Name | All Courses Excel verification |
-| Sheet1 | TC_ID, Course, InvalidCourse | Search management |
+| CourseData | TC_ID, Course Name | All Courses and Search management|
+| Sheet1 | TC_ID, Course, InvalidCourse | Cart management |
 | Explore | Category, Course, URL | Explore scenarios |
 
 ---
