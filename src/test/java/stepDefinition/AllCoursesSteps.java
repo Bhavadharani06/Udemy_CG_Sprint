@@ -1,10 +1,8 @@
 package stepDefinition;
 
-import io.cucumber.datatable.DataTable;
+import io.cucumber.datatable.DataTable; 
 import io.cucumber.java.en.*;
-
 import java.util.List;
-
 import utility.AllFunctionality;
 import utility.Pages;
 
@@ -109,7 +107,7 @@ public class AllCoursesSteps {
         int rowNum = 1; // row 0 = header, start from row 1
         while (true) {
             try {
-                String courseName = util.getDataFromSingleCell(rowNum, 0); // column 0 = course name
+                String courseName = util.getDataFromSingleCell(rowNum, 1); // column 0 = course name
                 if (courseName == null || courseName.trim().isEmpty()) break;
 
                 boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);

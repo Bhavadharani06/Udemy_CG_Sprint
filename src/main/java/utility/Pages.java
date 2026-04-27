@@ -27,14 +27,15 @@ public class Pages {
 	public ArchivePage archivePage;
 	public LearningToolsPage learningToolsPage;
 	public AllCoursesPage allCoursesPage;
-	 public  CommonstepsPage common;
-	    public  Explore1Page page1;
-	    public  Explore2Page page2;
-	    public  Explore3Page page3;
-	    public  Explore4Page page4;
-	    public  Explore5Page page5;
-	    public  ExplorePage explorepage;
-	// ✅ Private constructor (per thread)
+	public  CommonstepsPage common;
+    public  Explore1Page page1;
+    public  Explore2Page page2;
+    public  Explore3Page page3;
+    public  Explore4Page page4;
+    public  Explore5Page page5;
+    public  ExplorePage explorepage;
+
+    // ✅ Private constructor (per thread)
 	private Pages(WebDriver driver) {
 		homePage = PageFactory.initElements(driver, HomePage.class);
 		searchResultsPage = PageFactory.initElements(driver, SearchResultsPage.class);

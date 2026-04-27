@@ -37,15 +37,16 @@ public class MyListPage {
     // All Courses tab in nav
     private By allCoursesTab = By.xpath("//a[contains(@href,'learning') and contains(.,'All courses')]");
 
-    // 3 dots button — Image 1 & 3: (//button[contains(@id,'dropdown-trigger')])
+    // 3 dots button — (//button[contains(@id,'dropdown-trigger')])
     // [1] = first course, [2] = second course
     private By firstThreeDots  = By.xpath("(//button[contains(@id,'dropdown-trigger')])[1]");
     private By secondThreeDots = By.xpath("(//button[contains(@id,'dropdown-trigger')])[2]");
 
-    // Create New List option in dropdown — Image 3: div text = "Create New List"
-    private By createNewListBtn = By.xpath("//div[contains(@class,'ud-block-list-item-content') and text()='Create New List']");
-
-    // Create new list modal fields — Image 4
+    // Create New List option in dropdown
+    private By createNewListBtn1 = By.xpath("(//div[contains(@class,'ud-block-list-item-content') and text()='Create New List'])[1]");
+    private By createNewListBtn2 = By.xpath("(//div[contains(@class,'ud-block-list-item-content') and text()='Create New List'])[2]");
+    
+    // Create new list modal fields
     private By listNameField    = By.xpath("//input[@placeholder='Name your list e.g. HTML skills']");
     private By descriptionField = By.xpath("//textarea[@placeholder='Why are you creating this list? e.g. To start a new business, To get a new job, To become a web developer']");
     private By createBtn        = By.xpath("//button[.//span[text()='Create']]");
@@ -117,7 +118,7 @@ public class MyListPage {
 
     // CREATE LIST MODAL
 
-    public void clickCreateNewList() {
+    public void clickCreateNewList(By createNewListBtn) {
         AllFunctionality.waitClickable(driver, createNewListBtn, 20).click();
         System.out.println("Clicked Create New List");
     }
@@ -175,7 +176,7 @@ public class MyListPage {
             Thread.sleep(1000);
 
             // Click Create New List
-            clickCreateNewList();
+            clickCreateNewList(createNewListBtn1);
             Thread.sleep(1000);
 
             // Fill modal
@@ -205,7 +206,7 @@ public class MyListPage {
             Thread.sleep(1000);
 
             // Click Create New List
-            clickCreateNewList();
+            clickCreateNewList(createNewListBtn2);
             Thread.sleep(1000);
 
             // Fill modal
