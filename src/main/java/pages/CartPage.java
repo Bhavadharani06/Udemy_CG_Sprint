@@ -1,11 +1,9 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.*; 
 import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.ui.*;
-
 import utility.AllFunctionality;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.HashSet;

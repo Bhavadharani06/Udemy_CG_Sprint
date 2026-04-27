@@ -15,7 +15,7 @@ import org.testng.annotations.Listeners;
 
     glue = "stepDefinition",
 
-    tags = "@invalidurl",   
+    tags = "@my_learnings",   
 
     plugin = {
         "pretty",
