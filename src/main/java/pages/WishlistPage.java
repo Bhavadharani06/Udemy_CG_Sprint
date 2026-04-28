@@ -59,16 +59,14 @@ public class WishlistPage {
         System.out.println("Clicked Browse Courses Now");
     }
 
-    // VALIDATION
+ // VALIDATION (RETURN BOOLEAN)
 
     public boolean isWishlistEmpty() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(emptyMsg));
-            System.out.println("Wishlist is EMPTY — 'Browse courses now' found");
+                    .until(ExpectedConditions.visibilityOfElementLocated(emptyMsg));
             return true;
         } catch (Exception e) {
-            System.out.println("Wishlist has courses");
             return false;
         }
     }
@@ -86,13 +84,19 @@ public class WishlistPage {
         return getWishlistCourses().size();
     }
 
+    public boolean isWishlistNotEmpty() {
+        return getWishlistCourseCount() > 0;
+    }
+
     public boolean isCourseInWishlist(String courseName) {
         for (WebElement course : getWishlistCourses()) {
-            if (course.getText().toLowerCase().contains(courseName.toLowerCase()))
+            if (course.getText().toLowerCase().contains(courseName.toLowerCase())) {
                 return true;
+            }
         }
         return false;
     }
+
 
     // HOVER + HEART ICON
 
@@ -131,28 +135,9 @@ public class WishlistPage {
         System.out.println("Navigated back to Wishlist page");
     }
 
-    // ASSERTIONS
-
-    public void assertWishlistNotEmpty() {
-        int count = getWishlistCourseCount();
-        if (count == 0)
-            System.out.println("FAIL: Wishlist is empty");
-        else
-            System.out.println("PASS: Wishlist has " + count + " course(s)");
-    }
-
-    public void assertCourseInWishlist(String courseName) {
-        if (isCourseInWishlist(courseName))
-            System.out.println("PASS: Course found in wishlist — " + courseName);
-        else
-            System.out.println("FAIL: Course NOT found in wishlist — " + courseName);
-    }
-
     // MAIN FLOW
 
     public void handleWishlistFlow() throws InterruptedException {
-
-        if (isWishlistEmpty()) {
             System.out.println("Wishlist is empty → browsing to add a course");
 
             // Step 1: Click Browse courses now → lands on homepage
@@ -163,13 +148,5 @@ public class WishlistPage {
 
             // Step 3: Go back to wishlist directly
             navigateBackToWishlist();
-
-            // Step 4: Assert
-            assertWishlistNotEmpty();
-
-        } else {
-            System.out.println("Wishlist already has courses → verifying");
-            assertWishlistNotEmpty();
         }
-    }
 }

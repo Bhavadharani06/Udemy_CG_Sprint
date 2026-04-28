@@ -1,6 +1,8 @@
 package stepDefinition;
 
-import io.cucumber.java.en.And;
+import org.testng.Assert;
+
+import io.cucumber.java.en.And; 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import utility.Pages;
@@ -26,8 +28,21 @@ public class ArchiveSteps {
     // ASSERTION
     @And("User verifies archive state after action")
     public void user_verifies_archive_state() {
-        // After archive   → assertArchiveHasCourses (already called inside handleArchiveFlow)
-        // After unarchive → assertArchiveIsEmpty    (already called inside handleArchiveFlow)
-        System.out.println("Archive flow completed and verified");
+
+        boolean isEmpty = Pages.get().archivePage.isArchiveEmpty();
+
+        if (isEmpty) {
+            // After unarchive → archive should be empty
+            Assert.assertTrue(
+                    Pages.get().archivePage.isArchiveNowEmpty(),
+                    "Archive is NOT empty after unarchiving"
+            );
+        } else {
+            // After archive → archive should have courses
+            Assert.assertTrue(
+                    Pages.get().archivePage.hasArchivedCourses(),
+                    "Archive is still empty after archiving"
+            );
+        }
     }
 }

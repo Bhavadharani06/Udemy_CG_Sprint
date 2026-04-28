@@ -1,5 +1,7 @@
 package stepDefinition;
 
+import org.testng.Assert;
+
 import io.cucumber.java.en.*;
 import utility.Pages;
 
@@ -31,11 +33,23 @@ public class WishlistSteps {
 
     @Then("User verifies wishlist is not empty")
     public void user_verifies_wishlist_not_empty() {
-        Pages.get().wishlistPage.assertWishlistNotEmpty();
-    }
 
+        boolean notEmpty = Pages.get().wishlistPage.isWishlistNotEmpty();
+
+        Assert.assertTrue(
+                notEmpty,
+                "Wishlist is empty"
+        );
+    }
+    
     @Then("User verifies course {string} is present in wishlist")
     public void user_verifies_course_in_wishlist(String courseName) {
-        Pages.get().wishlistPage.assertCourseInWishlist(courseName);
+
+        boolean found = Pages.get().wishlistPage.isCourseInWishlist(courseName);
+
+        Assert.assertTrue(
+                found,
+                "Course NOT found in wishlist — " + courseName
+        );
     }
 }

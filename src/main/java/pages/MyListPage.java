@@ -144,18 +144,12 @@ public class MyListPage {
 
     // ASSERTION
 
-    public void assertListCreated(String listName) {
-        if (isListCreated(listName))
-            System.out.println("PASS: List created and visible — " + listName);
-        else
-            System.out.println("FAIL: List NOT found — " + listName);
+    public boolean verifyListCreated(String listName) {
+        return isListCreated(listName);
     }
 
-    public void assertListPresent() {
-        if (!isListEmpty())
-            System.out.println("PASS: My Lists already has lists");
-        else
-            System.out.println("FAIL: My Lists is empty");
+    public boolean verifyListPresent() {
+        return !isListEmpty();
     }
 
     // MAIN FLOW
@@ -189,9 +183,6 @@ public class MyListPage {
             clickMyListTab();
             Thread.sleep(1500);
 
-            // Verify
-            assertListCreated(listName);
-
         } else {
 
             // ── HAS COURSES: navigate to All Courses tab manually ──
@@ -219,8 +210,6 @@ public class MyListPage {
             clickMyListTab();
             Thread.sleep(1500);
 
-            // Verify
-            assertListCreated(listName);
         }
     }
 }

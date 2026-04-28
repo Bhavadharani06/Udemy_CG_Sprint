@@ -66,16 +66,14 @@ public class ArchivePage {
         System.out.println("Clicked Go to All Courses tab");
     }
 
-    // VALIDATION 
+ // VALIDATION (RETURN BOOLEAN)
 
     public boolean isArchiveEmpty() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(emptyArchiveBy));
-            System.out.println("Archive is EMPTY");
+                    .until(ExpectedConditions.visibilityOfElementLocated(emptyArchiveBy));
             return true;
         } catch (Exception e) {
-            System.out.println("Archive has courses");
             return false;
         }
     }
@@ -89,11 +87,19 @@ public class ArchivePage {
         }
     }
 
+    public boolean hasArchivedCourses() {
+        return getArchivedCourseCount() > 0;
+    }
+
+    public boolean isArchiveNowEmpty() {
+        return isArchiveEmpty();
+    }
+
     public String getFirstArchivedCourseTitle() {
-        try {
-            List<WebElement> courses = driver.findElements(archivedCourses);
-            if (!courses.isEmpty()) return courses.get(0).getText().trim();
-        } catch (Exception e) {}
+        List<WebElement> courses = driver.findElements(archivedCourses);
+        if (!courses.isEmpty()) {
+            return courses.get(0).getText().trim();
+        }
         return "";
     }
 
@@ -121,23 +127,6 @@ public class ArchivePage {
         System.out.println("Clicked Unarchive");
     }
 
-    // ASSERTIONS
-
-    public void assertArchiveHasCourses() {
-        int count = getArchivedCourseCount();
-        if (count > 0)
-            System.out.println("PASS: Archive has " + count + " course(s) after archiving");
-        else
-            System.out.println("FAIL: Archive is still empty after archiving");
-    }
-
-    public void assertArchiveIsEmpty() {
-        if (isArchiveEmpty())
-            System.out.println("PASS: Archive is empty after unarchiving");
-        else
-            System.out.println("FAIL: Archive still has courses after unarchiving");
-    }
-
     // MAIN FLOW
 
     public void handleArchiveFlow() throws InterruptedException {
@@ -158,9 +147,7 @@ public class ArchivePage {
             // Come back to Archived tab
             clickArchivedTab();
             Thread.sleep(1500);
-
-            // Assert course is now in archive
-            assertArchiveHasCourses();
+          
 
         } else {
 
@@ -174,8 +161,6 @@ public class ArchivePage {
             clickUnarchive();
             Thread.sleep(1500);
 
-            // Assert archive is now empty
-            assertArchiveIsEmpty();
         }
     }
 }

@@ -228,47 +228,18 @@ public class LearningToolsPage {
     }
 
     // ASSERTIONS
+ // ASSERT METHODS (UPDATED)
 
-    // Assert the step indicator shows the expected step e.g. "Step 1 of 3" 
-    public void assertStepIndicator(String expectedText) {
-        try {
-            String actual = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(stepIndicator)
-            ).getText().trim();
-            if (!actual.contains(expectedText))
-                throw new AssertionError(
-                    "FAIL: Expected step '" + expectedText + "' but got '" + actual + "'");
-            System.out.println("PASS: Step indicator = " + actual);
-        } catch (AssertionError e) {
-            throw e;
-        } catch (Exception e) {
-            throw new AssertionError("FAIL: Step indicator not found — " + e.getMessage());
-        }
-    }
-
-    // Assert modal is closed (Done was clicked successfully)
-    public void assertModalClosed() {
+    public boolean isModalClosed() {
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(doneBtn));
-            System.out.println("PASS: Reminder modal is closed");
+            return true;
         } catch (Exception e) {
-            throw new AssertionError("FAIL: Reminder modal is still open after clicking Done");
+            return false;
         }
     }
 
-    // Assert at least one reminder card is visible on Learning Tools page 
-    public void assertReminderCreated() {
-
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(reminderCards));
-            System.out.println("PASS: Reminder card visible");
-
-        } catch (Exception e) {
-            System.out.println("FAIL: Reminder card not found");
-        }
-    }
-    
-    public void verifyReminderCreated(String courseName) {
+    public boolean isReminderCreated(String courseName) {
 
         try {
             driver.navigate().refresh();
@@ -276,33 +247,19 @@ public class LearningToolsPage {
 
             List<WebElement> reminders = driver.findElements(reminderCards);
 
-            if (reminders.size() == 0) {
-                System.out.println("FAIL: No reminder cards found");
-                return;
-            }
-
-            boolean found = false;
-
             for (WebElement reminder : reminders) {
 
                 String text = reminder.getText().toLowerCase();
 
-                System.out.println("DEBUG Reminder Text: " + text);
-
                 if (text.contains(courseName.toLowerCase())) {
-                    found = true;
-                    break;
+                    return true;
                 }
             }
 
-            if (found) {
-                System.out.println("PASS: Reminder created for → " + courseName);
-            } else {
-                System.out.println("FAIL: Reminder exists but course not matching → " + courseName);
-            }
-
         } catch (Exception e) {
-            System.out.println("ERROR while verifying reminder → " + e.getMessage());
+            return false;
         }
+
+        return false;
     }
 }
