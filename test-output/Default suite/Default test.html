@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>10/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>9/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Apr 26 20:24:54 IST 2026</td>
+<td>Started on:</td><td>Mon Apr 27 22:53:34 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>428 seconds (428835 ms)</td>
+<tr><td>Total time:</td><td>366 seconds (366957 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,33 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify no courses message when nothing is enrolled", "All Courses Management"</td>
+<td><div><pre>java.lang.AssertionError: &apos;Start learning&apos; message not displayed expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at stepDefinition.AllCoursesSteps.user_should_see_no_courses_message(AllCoursesSteps.java:42)
+	at ✽.user should see the no courses message(file:///C:/Users/preet/Documents/Udemy_CG_Sprint/src/test/java/features/all_courses.feature:29)
+</pre></div><a href='#' onClick='toggleBox("stack-trace850294592", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace850294592'><pre>java.lang.AssertionError: &apos;Start learning&apos; message not displayed expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at stepDefinition.AllCoursesSteps.user_should_see_no_courses_message(AllCoursesSteps.java:42)
+	at ✽.user should see the no courses message(file:///C:/Users/preet/Documents/Udemy_CG_Sprint/src/test/java/features/all_courses.feature:29)
+</pre></div></td>
+<td>321</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,55 +103,50 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Open first course play video and navigate back", "All Courses Management"</td>
-<td></td>
-<td>411</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
-<tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Create learning reminder", "Learning Reminder Management"</td>
-<td></td>
-<td>412</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
-<tr>
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Handle archive dynamically and verify", "Archive Management"</td>
 <td></td>
-<td>411</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
-<tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Handle wishlist dynamically and verify", "Wishlist Management"</td>
-<td></td>
-<td>426</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
-<tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify multiple courses using DataTable", "All Courses Management"</td>
-<td></td>
-<td>352</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
+<td>342</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
 <tr>
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Create learning reminder", "Learning Reminder Management"</td>
 <td></td>
-<td>383</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
-<tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify no courses message when nothing is enrolled", "All Courses Management"</td>
-<td></td>
-<td>360</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
+<td>362</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
 <tr>
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Handle My Lists and verify list creation", "My Lists Management"</td>
 <td></td>
-<td>411</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
+<td>363</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
 <tr>
-<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify courses from Excel sheet", "All Courses Management"</td>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify multiple courses using DataTable", "All Courses Management"</td>
 <td></td>
-<td>412</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
+<td>321</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
 <tr>
 <td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Create learning reminder", "Learning Reminder Management"</td>
 <td></td>
-<td>375</td>
-<td>testRunner.RunnerIO@71e9ddb4</td></tr>
+<td>362</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Handle wishlist dynamically and verify", "Wishlist Management"</td>
+<td></td>
+<td>363</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Open first course play video and navigate back", "All Courses Management"</td>
+<td></td>
+<td>363</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify courses from Excel sheet", "All Courses Management"</td>
+<td></td>
+<td>328</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
+<tr>
+<td title='testRunner.RunnerIO.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerIO<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Create learning reminder", "Learning Reminder Management"</td>
+<td></td>
+<td>363</td>
+<td>testRunner.RunnerIO@65d09a04</td></tr>
 </table><p>
 </body>
 </html>

@@ -1,20 +1,19 @@
 package stepDefinition;
 
 import io.cucumber.java.en.*;
+import org.testng.Assert;
 import utility.Base;
 import utility.Pages;
 
 public class LearningToolsSteps {
 
     @Given("User is on My Learning Page and Learning Tools")
-    public void user_is_on_my_learning_page_and_learning_tools()
-            throws InterruptedException {
+    public void user_is_on_my_learning_page_and_learning_tools() throws InterruptedException {
         Base.getDriver().get("https://www.udemy.com/home/my-courses/");
         Thread.sleep(2000);
-        System.out.println("Navigated to My Learning page");
     }
 
-    @When("User navigates to Learning Tools")
+    @When("User navigates to Learning Tools") 
     public void user_navigates_to_learning_tools() throws InterruptedException {
         Pages.get().learningToolsPage.navigateToLearningTools();
         Pages.get().learningToolsPage.clickAddNewReminder();
@@ -44,11 +43,21 @@ public class LearningToolsSteps {
         Pages.get().learningToolsPage.clickNext();
         Pages.get().learningToolsPage.clickDone();
 
-        Pages.get().learningToolsPage.assertModalClosed();
+        // ASSERT MODAL CLOSED
+        Assert.assertTrue(
+                Pages.get().learningToolsPage.isModalClosed(),
+                "Reminder modal did not close"
+        );
     }
 
     @Then("the reminder should be visible on the Learning Tools page for {string}")
     public void assertReminderVisible(String courseName) {
-        Pages.get().learningToolsPage.verifyReminderCreated(courseName);
+
+        boolean found = Pages.get().learningToolsPage.isReminderCreated(courseName);
+
+        Assert.assertTrue(
+                found,
+                "Reminder NOT created for course: " + courseName
+        );
     }
 }

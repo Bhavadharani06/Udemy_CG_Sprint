@@ -1,8 +1,12 @@
 package stepDefinition;
 
-import io.cucumber.datatable.DataTable; 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import java.util.List;
+import java.util.Map;
+
+import org.testng.Assert;
+
 import utility.AllFunctionality;
 import utility.Pages;
 
@@ -10,35 +14,48 @@ public class AllCoursesSteps {
 
     AllFunctionality util = new AllFunctionality();
 
-    // BACKGROUND 
+    // BACKGROUND
 
     @Given("user navigates directly to All Courses page")
     public void user_navigates_directly_to_all_courses_page() {
         Pages.get().allCoursesPage.navigateToAllCourses();
     }
 
-    // COURSE PRESENCE 
+    // COURSE PRESENCE
+
     @Then("user should see at least one course in All Courses")
     public void user_should_see_at_least_one_course() {
-        Pages.get().allCoursesPage.assertCoursesPresent();
+
+        int count = Pages.get().allCoursesPage.getCourseCount();
+
+        Assert.assertTrue(
+                count > 0,
+                "No courses found in All Courses page"
+        );
     }
 
     @Then("user should see the no courses message")
     public void user_should_see_no_courses_message() {
+
         boolean displayed = Pages.get().allCoursesPage.isNoCourseMessageDisplayed();
-        if (!displayed)
-            System.out.println("FAIL: 'Start learning' message not displayed");
-        else
-            System.out.println("PASS: No courses message displayed");
+//      assertFalse
+        Assert.assertTrue(
+                displayed,
+                "'Start learning' message not displayed"
+        );
     }
 
     @Then("user gets the first course title")
     public void user_gets_first_course_title() {
+
         String title = Pages.get().allCoursesPage.getFirstCourseTitle();
-        if (title.isEmpty())
-            System.out.println("FAIL: First course title is empty");
-        else
-            System.out.println("First course title: " + title);
+
+        Assert.assertFalse(
+                title.isEmpty(),
+                "First course title is empty"
+        );
+
+        System.out.println("First course title: " + title);
     }
 
     // CLICK FIRST COURSE & PLAY
@@ -61,37 +78,51 @@ public class AllCoursesSteps {
         Pages.get().allCoursesPage.navigateBackToAllCourses();
     }
 
-    // ASSERTIONS
+    // ASSERTION
 
     @And("user asserts course count is more than 0")
     public void user_asserts_course_count_more_than_zero() {
+
         int count = Pages.get().allCoursesPage.getCourseCount();
-        if (count == 0)
-            System.out.println("FAIL: Expected courses but found 0");
-        else
-            System.out.println("PASS: Course count after returning = " + count);
+
+        Assert.assertTrue(
+                count > 0,
+                "Expected courses but found 0"
+        );
     }
 
-    // Scenario Outline step
+    // SINGLE COURSE CHECK (Scenario Outline support)
+
     @Then("user should see course {string} in All Courses")
     public void user_should_see_course_in_all_courses(String courseName) {
-        Pages.get().allCoursesPage.assertCoursePresent(courseName);
+
+        boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);
+
+        Assert.assertTrue(
+                found,
+                "Course NOT found — " + courseName
+        );
     }
 
-    // DATATABLE
+    // DATATABLE (FIXED)
 
     @Then("user verifies the following courses are present:")
     public void user_verifies_following_courses_present(DataTable dataTable) {
-        List<String> courseNames = dataTable.asList(String.class);
 
-        for (String courseName : courseNames) {
-            if (courseName.equalsIgnoreCase("courseName")) continue; // skip header
+        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> row : rows) {
+
+            String courseName = row.get("courseName");
 
             boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);
-            if (!found)
-                System.out.println("FAIL: Course NOT found — " + courseName);
-            else
-                System.out.println("PASS (DataTable): " + courseName);
+
+            Assert.assertTrue(
+                    found,
+                    "Course NOT found — " + courseName
+            );
+
+            System.out.println("Verified (DataTable): " + courseName);
         }
     }
 
@@ -99,28 +130,31 @@ public class AllCoursesSteps {
 
     @Then("user verifies courses from excel sheet {string}")
     public void user_verifies_courses_from_excel(String sheetName) throws Exception {
+
         String excelPath = System.getProperty("user.dir")
                 + "/src/test/resources/TestData/TestData.xlsx";
 
         util.loadExcelFile(excelPath, sheetName);
 
-        int rowNum = 1; // row 0 = header, start from row 1
-        while (true) {
-            try {
-                String courseName = util.getDataFromSingleCell(rowNum, 1); // column 0 = course name
-                if (courseName == null || courseName.trim().isEmpty()) break;
+        // Fetch specific cells
+        String course1 = util.getDataFromSingleCell(2, 1);
+        String course2 = util.getDataFromSingleCell(3, 1);
 
-                boolean found = Pages.get().allCoursesPage.isCoursePresent(courseName);
-                if (!found)
-                    System.out.println("FAIL: Course from Excel NOT found — " + courseName);
-                else
-                    System.out.println("PASS (Excel row " + rowNum + "): " + courseName);
+        // Verify course 1
+        boolean found1 = Pages.get().allCoursesPage.isCoursePresent(course1);
+        Assert.assertTrue(
+                found1,
+                "Course from Excel NOT found — " + course1
+        );
+        System.out.println("Verified (Excel): " + course1);
 
-                rowNum++;
-            } catch (Exception e) {
-                break; // no more rows
-            }
-        }
+        // Verify course 2
+        boolean found2 = Pages.get().allCoursesPage.isCoursePresent(course2);
+        Assert.assertTrue(
+                found2,
+                "Course from Excel NOT found — " + course2
+        );
+        System.out.println("Verified (Excel): " + course2);
 
         util.closeExcel();
     }

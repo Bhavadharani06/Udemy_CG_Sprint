@@ -1,5 +1,7 @@
 package stepDefinition;
 
+import org.testng.Assert;
+
 import io.cucumber.java.en.*;
 import utility.Pages;
 
@@ -31,6 +33,23 @@ public class MyListSteps {
 
     @And("User verifies the list is present in My Lists")
     public void user_verifies_list_present() {
-        Pages.get().myListPage.assertListPresent();
+
+        boolean isPresent = Pages.get().myListPage.verifyListPresent();
+
+        Assert.assertTrue(
+            isPresent,
+            "My Lists is empty — expected at least one list"
+        );
+    }
+    
+    @And("User verifies list {string} is created")
+    public void user_verifies_list_created(String listName) {
+
+        boolean isCreated = Pages.get().myListPage.verifyListCreated(listName);
+
+        Assert.assertTrue(
+            isCreated,
+            "List was NOT created: " + listName
+        );
     }
 }

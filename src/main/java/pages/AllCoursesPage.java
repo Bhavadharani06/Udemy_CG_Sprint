@@ -114,28 +114,4 @@ public class AllCoursesPage {
 		}
 	}
 
-	// ASSERTIONS
-
-	public void assertCoursesPresent() {
-		int count = getCourseCount();
-		if (count == 0)
-			System.out.println("FAIL: No courses found in All Courses page");
-		else
-			System.out.println("PASS: " + count + " course(s) found in All Courses");
-	}
-
-	public void assertCoursePresent(String courseName) {
-		if (!isCoursePresent(courseName))
-			System.out.println("FAIL: Course NOT found — " + courseName);
-		else
-			System.out.println("PASS: Course found — " + courseName);
-	}
-
-	public void assertCourseCount(int expected) {
-		int actual = getCourseCount();
-		if (actual != expected)
-			System.out.println("FAIL: Expected " + expected + " courses but got " + actual);
-		else
-			System.out.println("PASS: Course count = " + actual);
-	}
 }

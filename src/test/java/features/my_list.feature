@@ -8,3 +8,4 @@ Feature: My Lists Management
     When User navigates to My Lists tab
     Then User handles My List flow with listName "Java List" and description "My learning list for Java Course"
     And User verifies the list is present in My Lists
+    And User verifies list "Java List" is created
